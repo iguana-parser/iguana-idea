@@ -1,0 +1,47 @@
+<idea-plugin version="2">
+  <id>com.iguana-parser.IGGY</id>
+  <name>IGGY</name>
+  <version>1.0</version>
+  <vendor email="" url="">Iguana-parser</vendor>
+
+  <description><![CDATA[
+      IDEA IDEs from Iguana grammars.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="iggy.gen.lang.IGGYFileTypeFactory"/>
+    <lang.syntaxHighlighterFactory key="IGGY" implementationClass="iggy.gen.editor.IGGYSyntaxHighlighterFactory"/>
+    <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
+    <!-- <colorSettingsPage implementation="syntax.IggyColorSettingPage"/> -->
+  </extensions>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
