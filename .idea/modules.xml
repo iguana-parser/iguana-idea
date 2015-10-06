@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Iguana-IDEA.iml" filepath="$PROJECT_DIR$/Iguana-IDEA.iml" />
-      <module fileurl="file://$USER_HOME$/git/iguana/iguana.iml" filepath="$USER_HOME$/git/iguana/iguana.iml" />
-      <module fileurl="file://$USER_HOME$/git/parse-trees/.idea/modules/parse-trees.iml" filepath="$USER_HOME$/git/parse-trees/.idea/modules/parse-trees.iml" />
-      <module fileurl="file://$USER_HOME$/git/utils/utils.iml" filepath="$USER_HOME$/git/utils/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/iguana.iml" filepath="$PROJECT_DIR$/../iguana/iguana.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iguana-idea.iml" filepath="$PROJECT_DIR$/iguana-idea.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees.iml" filepath="$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../utils/utils.iml" filepath="$PROJECT_DIR$/../utils/utils.iml" />
     </modules>
   </component>
 </project>

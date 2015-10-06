@@ -8,5 +8,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="iguana" exported="" />
+    <orderEntry type="module" module-name="parse-trees" exported="" />
+    <orderEntry type="module" module-name="utils" exported="" />
+    <orderEntry type="library" exported="" name="scala-sdk-2.11.7" level="application" />
   </component>
 </module>

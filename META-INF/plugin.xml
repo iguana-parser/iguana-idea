@@ -25,11 +25,11 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-    <fileTypeFactory implementation="iggy.gen.lang.IGGYFileTypeFactory"/>
-    <lang.syntaxHighlighterFactory key="IGGY" implementationClass="iggy.gen.editor.IGGYSyntaxHighlighterFactory"/>
-    <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
-    <!-- <colorSettingsPage implementation="syntax.IggyColorSettingPage"/> -->
+      <!-- Add your extensions here -->
+      <fileTypeFactory implementation="iggy.gen.lang.IGGYFileTypeFactory"/>
+      <lang.syntaxHighlighterFactory key="IGGY" implementationClass="iggy.gen.editor.IGGYSyntaxHighlighterFactory"/>
+      <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
+      <lang.parserDefinition language="IGGY" implementationClass="iggy.gen.parser.IGGYParserDefinition"/>
   </extensions>
 
   <application-components>
