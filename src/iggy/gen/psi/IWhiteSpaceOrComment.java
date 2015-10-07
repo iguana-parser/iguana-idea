@@ -5,6 +5,5 @@ package iggy.gen.psi;
 import com.intellij.psi.PsiElement;
 import java.util.List;
 
-public interface ILayout extends PsiElement {
-    public List<PsiElement> getWhiteSpaceOrCommentList();
+public interface IWhiteSpaceOrComment extends PsiElement {
 }

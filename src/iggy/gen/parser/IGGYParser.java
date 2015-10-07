@@ -1,6 +1,7 @@
 package iggy.gen.parser;
 
-import com.intellij.lang.ASTFactory;
+/* This file has been generated. */
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -8,7 +9,6 @@ import com.intellij.psi.impl.source.tree.Factory;
 import com.intellij.psi.tree.IElementType;
 import iguana.parsetrees.sppf.NonterminalNode;
 import iguana.parsetrees.tree.TermBuilder;
-import iguana.parsetrees.tree.TreeBuilder;
 import iguana.utils.input.Input;
 import org.iguana.grammar.Grammar;
 import org.iguana.grammar.GrammarGraph;
@@ -20,13 +20,6 @@ import org.iguana.parser.GLLParser;
 import org.iguana.parser.ParseResult;
 import org.iguana.parser.ParserFactory;
 import org.iguana.util.Configuration;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-
-/**
- * Created by Anastasia Izmaylova on 29/09/15.
- */
 
 public class IGGYParser implements PsiParser {
 
@@ -34,42 +27,28 @@ public class IGGYParser implements PsiParser {
     private GrammarGraph graph;
     private GLLParser parser;
 
-
-    @NotNull
-    @Override
     public ASTNode parse(IElementType root, PsiBuilder builder) {
-
         Input input = Input.fromString(builder.getOriginalText().toString());
-        // Input input = Input.fromString("A ::= B() [0] D() {0}");
-        if (graph == null) {
-            grammar = Grammar.load(new File("/Users/anastasiaizmaylova/git/iguana-idea/src/iggy/gen/parser/grammar/IGGY"));
-
+        if (parser == null) {
+            grammar = Grammar.load(this.getClass().getClassLoader().getResourceAsStream("iggy/gen/parser/grammar/IGGY"));
             DesugarPrecedenceAndAssociativity precedenceAndAssociativity = new DesugarPrecedenceAndAssociativity();
             precedenceAndAssociativity.setOP2();
-
-            grammar = new LayoutWeaver().transform(precedenceAndAssociativity.transform(new EBNFToBNF().transform(grammar)));
-
-            System.out.println(grammar);
-
+            grammar = new EBNFToBNF().transform(grammar);
+            grammar = precedenceAndAssociativity.transform(grammar);
+            grammar = new LayoutWeaver().transform(grammar);
             graph = grammar.toGrammarGraph(input, Configuration.DEFAULT);
             parser = ParserFactory.getParser();
         }
-
         ParseResult result = parser.parse(input, graph, Nonterminal.withName("Definition"));
-
         if (result.isParseSuccess()) {
             System.out.println("Success...");
-            NonterminalNode node = result.asParseSuccess().getSPPFNode();
-            System.out.println(node);
-            ASTNode astNode = TermBuilder.build(node, new IGGYTreeBuilder(input));
-            return astNode;
+            NonterminalNode sppf = result.asParseSuccess().getSPPFNode();
+            ASTNode ast = TermBuilder.build_no_memo(sppf, new IGGYTreeBuilder(input));
+            System.out.println("Term has been built...");
+            return ast;
         } else {
             System.out.println("Parse error...");
-            return Factory.createErrorElement("Parse error");
+            return Factory.createErrorElement("Sorry, you have a parse error.");
         }
-    }
-
-    public static void main(String[] args) {
-        new IGGYParser().parse(null, null);
     }
 }

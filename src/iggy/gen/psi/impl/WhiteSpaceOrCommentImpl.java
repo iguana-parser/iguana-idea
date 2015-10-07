@@ -14,11 +14,10 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class LayoutImpl extends ASTWrapperPsiElement implements ILayout {
+public class WhiteSpaceOrCommentImpl extends ASTWrapperPsiElement implements IWhiteSpaceOrComment {
 
-    public LayoutImpl(ASTNode node) { super(node); }
+    public WhiteSpaceOrCommentImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public List<PsiElement> getWhiteSpaceOrCommentList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

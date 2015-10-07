@@ -1,5 +1,7 @@
 package iggy.gen.parser;
 
+/* This file has been generated. */
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
@@ -16,66 +18,26 @@ import iggy.gen.lang.IGGYLang;
 import iggy.gen.lexer.IGGYLexer;
 import iggy.gen.psi.IGGYElementTypes;
 import iggy.gen.psi.IGGYTokenTypes;
-import org.jetbrains.annotations.NotNull;
-
-/**
- * Created by Anastasia Izmaylova on 29/09/15.
- */
 
 public class IGGYParserDefinition implements ParserDefinition {
 
-    public static final TokenSet WHITESPACES = TokenSet.create(IGGYTokenTypes.WHITESPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(IGGYTokenTypes.COMMENT);
-
     public static final IFileElementType FILE = new IFileElementType(Language.<IGGYLang>findInstance(IGGYLang.class));
 
-    @NotNull
-    @Override
-    public Lexer createLexer(Project project) {
-        return new IGGYLexer();
-    }
+    public Lexer createLexer(Project project) { return new IGGYLexer(); }
 
-    @Override
-    public PsiParser createParser(Project project) {
-        return new IGGYParser();
-    }
+    public PsiParser createParser(Project project) { return new IGGYParser(); }
 
-    @Override
-    public IFileElementType getFileNodeType() {
-        return FILE;
-    }
+    public IFileElementType getFileNodeType() { return FILE; }
 
-    @NotNull
-    @Override
-    public TokenSet getWhitespaceTokens() {
-        return WHITESPACES;
-    }
+    public TokenSet getWhitespaceTokens() { return TokenSet.EMPTY; }
 
-    @NotNull
-    @Override
-    public TokenSet getCommentTokens() {
-        return COMMENTS;
-    }
+    public TokenSet getCommentTokens() { return TokenSet.EMPTY; }
 
-    @NotNull
-    @Override
-    public TokenSet getStringLiteralElements() {
-        return TokenSet.EMPTY;
-    }
+    public TokenSet getStringLiteralElements() { return TokenSet.EMPTY; }
 
-    @NotNull
-    @Override
-    public PsiElement createElement(ASTNode node) {
-        return IGGYElementTypes.Factory.createElement(node);
-    }
+    public PsiElement createElement(ASTNode node) { return IGGYElementTypes.Factory.createElement(node); }
 
-    @Override
-    public PsiFile createFile(FileViewProvider viewProvider) {
-        return new IGGYFile(viewProvider);
-    }
+    public PsiFile createFile(FileViewProvider viewProvider) { return new IGGYFile(viewProvider); } 
 
-    @Override
-    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
-        return SpaceRequirements.MAY;
-    }
+    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) { return SpaceRequirements.MAY; }
 }
