@@ -20,7 +20,13 @@ public class SymbolNonterminalImpl extends ASTWrapperPsiElement implements ISymb
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IArguments getArguments() { return findNotNullChildByClass(IArguments.class); }
+    public List<List<PsiElement>> getElementLists() {
+        List<List<PsiElement>> result = new ArrayList<>();
+        for (IEbnfElement e : PsiTreeUtil.getChildrenOfTypeAsList(this, IEbnfElement.class))
+            result.add(e.getElements());
+        return result;
+    }
+    public INontName getNontName() { return findNotNullChildByClass(INontName.class); }
     public List<PsiElement> getExpressionList() { return null; }
     public ITerminal getTerminal() { return null; }
     public List<PsiElement> getBindingList() { return null; }

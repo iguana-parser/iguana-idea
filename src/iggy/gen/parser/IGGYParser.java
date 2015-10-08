@@ -9,6 +9,7 @@ import com.intellij.psi.impl.source.tree.Factory;
 import com.intellij.psi.tree.IElementType;
 import iguana.parsetrees.sppf.NonterminalNode;
 import iguana.parsetrees.tree.TermBuilder;
+import iguana.parsetrees.tree.TreeVisualization;
 import iguana.utils.input.Input;
 import org.iguana.grammar.Grammar;
 import org.iguana.grammar.GrammarGraph;
@@ -43,12 +44,21 @@ public class IGGYParser implements PsiParser {
         if (result.isParseSuccess()) {
             System.out.println("Success...");
             NonterminalNode sppf = result.asParseSuccess().getSPPFNode();
-            ASTNode ast = TermBuilder.build_no_memo(sppf, new IGGYTreeBuilder(input));
-            System.out.println("Term has been built...");
+            ASTNode ast;
+            try {
+                ast = TermBuilder.build_no_memo(sppf, new IGGYTreeBuilder(input));
+                System.out.println("Psi term has been built...");
+            } catch (IGGYTreeBuilder.TreeBuilderRuntimeException e) {
+                ast = Factory.createErrorElement(e.getMessage());
+            }
             return ast;
         } else {
             System.out.println("Parse error...");
-            return Factory.createErrorElement("Sorry, you have a parse error.");
+            return Factory.createErrorElement("Parse error");
         }
+    }
+
+    public static void main(String[] args) {
+        new IGGYParser().parse(null, null);
     }
 }

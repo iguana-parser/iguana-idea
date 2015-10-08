@@ -20,7 +20,8 @@ public class SymbolConstraintImpl extends ASTWrapperPsiElement implements ISymbo
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IArguments getArguments() { return null; }
+    public List<List<PsiElement>> getElementLists() { return null; }
+    public INontName getNontName() { return null; }
     public List<PsiElement> getExpressionList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
     public ITerminal getTerminal() { return null; }
     public List<PsiElement> getBindingList() { return null; }

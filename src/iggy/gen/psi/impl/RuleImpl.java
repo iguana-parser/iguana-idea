@@ -20,6 +20,7 @@ public class RuleImpl extends ASTWrapperPsiElement implements IRule {
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public INontName getNontName() { return findNotNullChildByClass(INontName.class); }
     public List<List<PsiElement>> getElementLists() {
         List<List<PsiElement>> result = new ArrayList<>();
         for (IEbnfElement e : PsiTreeUtil.getChildrenOfTypeAsList(this, IEbnfElement.class))

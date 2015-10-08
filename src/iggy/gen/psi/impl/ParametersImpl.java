@@ -20,4 +20,5 @@ public class ParametersImpl extends ASTWrapperPsiElement implements IParameters 
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public List<PsiElement> getVarNameList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

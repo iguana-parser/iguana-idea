@@ -11,6 +11,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import iggy.gen.lang.IGGYFile;
@@ -37,7 +38,11 @@ public class IGGYParserDefinition implements ParserDefinition {
 
     public PsiElement createElement(ASTNode node) { return IGGYElementTypes.Factory.createElement(node); }
 
-    public PsiFile createFile(FileViewProvider viewProvider) { return new IGGYFile(viewProvider); } 
+    public PsiFile createFile(FileViewProvider viewProvider) {
+        IGGYFile file = new IGGYFile(viewProvider);
+        file.putUserData(BlockSupport.DO_NOT_REPARSE_INCREMENTALLY, Boolean.TRUE);
+        return file;
+    }
 
     public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) { return SpaceRequirements.MAY; }
 }

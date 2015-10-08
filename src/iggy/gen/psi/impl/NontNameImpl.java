@@ -14,13 +14,10 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class ExpressionMultiplicationImpl extends ASTWrapperPsiElement implements IExpression {
+public class NontNameImpl extends ASTWrapperPsiElement implements INontName {
 
-    public ExpressionMultiplicationImpl(ASTNode node) { super(node); }
+    public NontNameImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IExpression getExpression() { return null; }
-    public List<IExpression> getExpressions() { return PsiTreeUtil.getChildrenOfTypeAsList(this, IExpression.class); }
-    public List<PsiElement> getExpressionList() { return null; }
 }

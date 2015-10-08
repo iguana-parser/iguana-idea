@@ -37,11 +37,11 @@ public class IGGYTreeBuilder implements TreeBuilder<TreeElement> {
         return node;
     }
 
-    public TreeElement ambiguityNode(scala.collection.Iterable<Branch<TreeElement>> children, int l, int r) { throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity."); }
+    public TreeElement ambiguityNode(scala.collection.Iterable<Branch<TreeElement>> children, int l, int r) { throw new TreeBuilderRuntimeException("ambiguity."); }
 
-    public TreeElement cycle() { throw new RuntimeException("Not yet supported in the idea tree builder: cycles."); }
+    public TreeElement cycle() { throw new TreeBuilderRuntimeException("cycles."); }
 
-    public Branch<TreeElement> branch(Seq<TreeElement> children) { throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity."); } 
+    public Branch<TreeElement> branch(Seq<TreeElement> children) { throw new TreeBuilderRuntimeException("ambiguity."); }
 
     public TreeElement star(Seq<TreeElement> children) {
         CompositeElement node = ASTFactory.composite(IGGYElementTypes.LIST);
@@ -73,4 +73,10 @@ public class IGGYTreeBuilder implements TreeBuilder<TreeElement> {
     }
 
     public TreeElement epsilon(int i) { return ASTFactory.leaf(IGGYTokenTypes.CHARACTER, ""); }
+
+    public static class TreeBuilderRuntimeException extends RuntimeException {
+        public TreeBuilderRuntimeException(String msg) {
+            super("SPPF-to-tree builder: " + msg);
+        }
+    }
 }

@@ -20,7 +20,8 @@ public class SymbolTerminalImpl extends ASTWrapperPsiElement implements ISymbol 
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IArguments getArguments() { return null; }
+    public List<List<PsiElement>> getElementLists() { return null; }
+    public INontName getNontName() { return null; }
     public List<PsiElement> getExpressionList() { return null; }
     public ITerminal getTerminal() { return findNotNullChildByClass(ITerminal.class); }
     public List<PsiElement> getBindingList() { return null; }

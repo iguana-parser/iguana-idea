@@ -20,5 +20,6 @@ public class BindingImpl extends ASTWrapperPsiElement implements IBinding {
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public IVarName getVarName() { return findNotNullChildByClass(IVarName.class); }
     public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
 }

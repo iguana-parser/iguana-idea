@@ -30,6 +30,7 @@
       <lang.syntaxHighlighterFactory key="IGGY" implementationClass="iggy.gen.editor.IGGYSyntaxHighlighterFactory"/>
       <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
       <lang.parserDefinition language="IGGY" implementationClass="iggy.gen.parser.IGGYParserDefinition"/>
+      <annotator language="IGGY" implementationClass="iggy.gen.editor.IGGYAnnotator"/>
   </extensions>
 
   <application-components>

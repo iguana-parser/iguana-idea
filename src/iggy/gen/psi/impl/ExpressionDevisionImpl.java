@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class ExpressionMultiplicationImpl extends ASTWrapperPsiElement implements IExpression {
+public class ExpressionDevisionImpl extends ASTWrapperPsiElement implements IExpression {
 
-    public ExpressionMultiplicationImpl(ASTNode node) { super(node); }
+    public ExpressionDevisionImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 

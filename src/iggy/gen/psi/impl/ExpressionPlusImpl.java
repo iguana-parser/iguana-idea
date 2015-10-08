@@ -20,5 +20,7 @@ public class ExpressionPlusImpl extends ASTWrapperPsiElement implements IExpress
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public IExpression getExpression() { return null; }
     public List<IExpression> getExpressions() { return PsiTreeUtil.getChildrenOfTypeAsList(this, IExpression.class); }
+    public List<PsiElement> getExpressionList() { return null; }
 }

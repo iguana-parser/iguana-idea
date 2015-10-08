@@ -5,7 +5,5 @@ package iggy.gen.psi;
 import com.intellij.psi.PsiElement;
 import java.util.List;
 
-public interface IBinding extends PsiElement {
-    public IVarName getVarName();
-    public IExpression getExpression();
+public interface IVarName extends PsiElement {
 }
