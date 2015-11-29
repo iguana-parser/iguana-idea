@@ -37,8 +37,11 @@ public class IGGYAnnotator implements Annotator {
                     annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("NONTNAME_UNRESOLVED_NAME", HighlighterColors.TEXT));
                 }
             } else {
-                Annotation annotation = holder.createErrorAnnotation(element.getTextRange(), "Unresolved variable name.");
-                annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("VARNAME_UNRESOLVED_NAME", HighlighterColors.TEXT));
+                // Annotation annotation = holder.createErrorAnnotation(element.getTextRange(), "Unresolved variable name.");
+                // annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("VARNAME_UNRESOLVED_NAME", HighlighterColors.TEXT));
+                // TODO: Uncomment the lines above and remove the line below when findVarName is implemented
+                Annotation annotation = holder.createInfoAnnotation(element.getTextRange(), null);
+                annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("VARNAME_RESOLVED_NAME", HighlighterColors.TEXT));
             }
         }
     }

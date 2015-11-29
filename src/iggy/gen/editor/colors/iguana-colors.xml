@@ -17,13 +17,13 @@
 
     <option name="CHAR">
         <value>
-            <option name="FOREGROUND" value="008000"/>
+            <option name="FOREGROUND" value="004d00"/>
         </value>
     </option>
 
     <option name="STRING">
         <value>
-            <option name="FOREGROUND" value="008000"/>
+            <option name="FOREGROUND" value="004d00"/>
         </value>
     </option>
 
@@ -50,14 +50,14 @@
 
     <option name="VARNAME_RESOLVED_NAME">
         <value>
-            <option name="FOREGROUND" value="696969"/>
+            <option name="FOREGROUND" value="404040"/>
             <option name="FONT_TYPE" value="1"/>
         </value>
     </option>
 
     <option name="VARNAME_UNRESOLVED_NAME">
         <value>
-            <option name="FOREGROUND" value="696969"/>
+            <option name="FOREGROUND" value="404040"/>
             <option name="FONT_TYPE" value="3"/>
         </value>
     </option>
