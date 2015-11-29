@@ -6,6 +6,7 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IBinding extends PsiElement {
-    public IVarName getVarName();
-    public IExpression getExpression();
+    IVarName$Declaration getVarName$Declaration();
+    IExpression getExpression();
+    IVarName$Reference getVarName$Reference();
 }

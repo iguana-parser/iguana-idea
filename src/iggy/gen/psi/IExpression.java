@@ -6,7 +6,9 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IExpression extends PsiElement {
-    public IExpression getExpression();
-    public List<IExpression> getExpressions();
-    public List<PsiElement> getExpressionList();
+    IVarName getVarName();
+    IVarName$Reference getVarName$Reference();
+    IExpression getExpression();
+    List<IExpression> getAllExpression();
+    IArguments getArguments();
 }

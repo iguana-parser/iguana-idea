@@ -9,6 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,5 +22,5 @@ public class ParametersImpl extends ASTWrapperPsiElement implements IParameters 
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public List<PsiElement> getVarNameList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
+    public List<PsiElement> getVarName$DeclarationList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

@@ -6,5 +6,5 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IDefinition extends PsiElement {
-    public List<PsiElement> getRuleList();
+    List<PsiElement> getRuleList();
 }

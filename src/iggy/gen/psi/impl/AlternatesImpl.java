@@ -9,15 +9,18 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class TerminalImpl extends ASTWrapperPsiElement implements ITerminal {
+public class AlternatesImpl extends ASTWrapperPsiElement implements IAlternates {
 
-    public TerminalImpl(ASTNode node) { super(node); }
+    public AlternatesImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public List<PsiElement> getAlternateList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

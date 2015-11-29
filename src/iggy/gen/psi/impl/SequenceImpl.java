@@ -9,25 +9,24 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class SymbolNonterminalImpl extends ASTWrapperPsiElement implements ISymbol {
+public class SequenceImpl extends ASTWrapperPsiElement implements ISequence {
 
-    public SymbolNonterminalImpl(ASTNode node) { super(node); }
+    public SequenceImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public List<List<PsiElement>> getElementLists() {
+    public ISymbol getSymbol() { return findNotNullChildByClass(ISymbol.class); }
+    public List<List<PsiElement>> getAllElementList() {
         List<List<PsiElement>> result = new ArrayList<>();
         for (IEbnfElement e : PsiTreeUtil.getChildrenOfTypeAsList(this, IEbnfElement.class))
             result.add(e.getElements());
         return result;
     }
-    public INontName getNontName() { return findNotNullChildByClass(INontName.class); }
-    public List<PsiElement> getExpressionList() { return null; }
-    public ITerminal getTerminal() { return null; }
-    public List<PsiElement> getBindingList() { return null; }
 }

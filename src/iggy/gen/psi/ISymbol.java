@@ -6,9 +6,18 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface ISymbol extends PsiElement {
-    public List<List<PsiElement>> getElementLists();
-    public INontName getNontName();
-    public List<PsiElement> getExpressionList();
-    public ITerminal getTerminal();
-    public List<PsiElement> getBindingList();
+    ISymbol getSymbol();
+    List<ISymbol> getAllSymbol();
+    ILabel getLabel();
+    INontName$Reference getNontName$Reference();
+    IRegexBody getRegexBody();
+    IRegex getRegex();
+    List<PsiElement> getExpressionList();
+    IVarName$Declaration getVarName$Declaration();
+    List<PsiElement> getBindingList();
+    IExpression getExpression();
+    ISymbols getSymbols();
+    List<PsiElement> getSymbolsList();
+    List<PsiElement> getSymbolList();
+    IArguments getArguments();
 }

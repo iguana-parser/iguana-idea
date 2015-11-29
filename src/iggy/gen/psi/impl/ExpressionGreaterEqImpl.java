@@ -9,6 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,7 +22,9 @@ public class ExpressionGreaterEqImpl extends ASTWrapperPsiElement implements IEx
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public IVarName getVarName() { return null; }
+    public IVarName$Reference getVarName$Reference() { return null; }
     public IExpression getExpression() { return null; }
-    public List<IExpression> getExpressions() { return PsiTreeUtil.getChildrenOfTypeAsList(this, IExpression.class); }
-    public List<PsiElement> getExpressionList() { return null; }
+    public List<IExpression> getAllExpression() { return PsiTreeUtil.getChildrenOfTypeAsList(this, IExpression.class); }
+    public IArguments getArguments() { return null; }
 }

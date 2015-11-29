@@ -9,17 +9,17 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class BindingImpl extends ASTWrapperPsiElement implements IBinding {
+public class IdentifierImpl extends ASTWrapperPsiElement implements IIdentifier {
 
-    public BindingImpl(ASTNode node) { super(node); }
+    public IdentifierImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IVarName getVarName() { return findNotNullChildByClass(IVarName.class); }
-    public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
 }

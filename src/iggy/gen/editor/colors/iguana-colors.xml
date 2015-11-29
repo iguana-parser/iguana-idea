@@ -1,43 +1,65 @@
 <?xml version='1.0'?>
 <list>
-    <option name="OPEN_PARENTHESIS">
+    <!-- User defined elements -->
+    <option name="KEYWORD">
         <value>
-            <option name="FOREGROUND" value="8B0000"/>
+            <option name="FOREGROUND" value="4d0026"/>
+            <option name="FONT_TYPE" value="1"/>
         </value>
     </option>
-    <option name="CLOSE_PARENTHESIS">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
-    <option name="OPEN_BRACE">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
-    <option name="CLOSE_BRACE">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
-    <option name="OPEN_BRACKET">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
-    <option name="CLOSE_BRACKET">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
-    <option name="OPERATOR">
-        <value>
-            <option name="FOREGROUND" value="8B0000"/>
-        </value>
-    </option>
+
     <option name="IDENTIFIER">
         <value>
-            <option name="FOREGROUND" value="0000FF"/>
+            <option name="FOREGROUND" value="A52A2A"/>
+            <!-- <option name="FONT_TYPE" value="1"/> -->
         </value>
     </option>
+
+    <option name="CHAR">
+        <value>
+            <option name="FOREGROUND" value="008000"/>
+        </value>
+    </option>
+
+    <option name="STRING">
+        <value>
+            <option name="FOREGROUND" value="008000"/>
+        </value>
+    </option>
+
+    <option name="BAD_CHARACTER">
+        <value>
+            <option name="FOREGROUND" value="FF0000"/>
+            <option name="FONT_TYPE" value="2"/>
+        </value>
+    </option>
+
+    <option name="NONTNAME_RESOLVED_NAME">
+        <value>
+            <option name="FOREGROUND" value="000066"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+
+    <option name="NONTNAME_UNRESOLVED_NAME">
+        <value>
+            <option name="FOREGROUND" value="000066"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
+
+    <option name="VARNAME_RESOLVED_NAME">
+        <value>
+            <option name="FOREGROUND" value="696969"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+
+    <option name="VARNAME_UNRESOLVED_NAME">
+        <value>
+            <option name="FOREGROUND" value="696969"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
+
 </list>

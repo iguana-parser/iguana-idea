@@ -6,5 +6,5 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IArguments extends PsiElement {
-    public List<PsiElement> getExpressionList();
+    List<PsiElement> getExpressionList();
 }

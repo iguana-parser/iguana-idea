@@ -9,6 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,4 +22,5 @@ public class LabelImpl extends ASTWrapperPsiElement implements ILabel {
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public IIdentifier getIdentifier() { return findNotNullChildByClass(IIdentifier.class); }
 }

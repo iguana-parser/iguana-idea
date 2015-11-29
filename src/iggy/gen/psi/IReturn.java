@@ -6,5 +6,5 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IReturn extends PsiElement {
-    public IExpression getExpression();
+    IExpression getExpression();
 }

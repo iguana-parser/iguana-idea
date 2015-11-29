@@ -9,6 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,7 +22,9 @@ public class ExpressionNumberImpl extends ASTWrapperPsiElement implements IExpre
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public IVarName getVarName() { return null; }
+    public IVarName$Reference getVarName$Reference() { return null; }
     public IExpression getExpression() { return null; }
-    public List<IExpression> getExpressions() { return null; }
-    public List<PsiElement> getExpressionList() { return null; }
+    public List<IExpression> getAllExpression() { return null; }
+    public IArguments getArguments() { return null; }
 }

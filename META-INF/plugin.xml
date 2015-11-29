@@ -31,6 +31,10 @@
       <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
       <lang.parserDefinition language="IGGY" implementationClass="iggy.gen.parser.IGGYParserDefinition"/>
       <annotator language="IGGY" implementationClass="iggy.gen.editor.IGGYAnnotator"/>
+      <lang.findUsagesProvider language="IGGY" implementationClass="iggy.gen.editor.IGGYFindUsesProvider"/>
+      <!--
+      <lang.psiStructureViewFactory language="IGGY" implementationClass="iggy.gen.psi.IGGYStructureViewFactory"/>
+      -->
   </extensions>
 
   <application-components>

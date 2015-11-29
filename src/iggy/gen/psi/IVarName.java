@@ -6,4 +6,5 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IVarName extends PsiElement {
+    IIdentifier getIdentifier();
 }
