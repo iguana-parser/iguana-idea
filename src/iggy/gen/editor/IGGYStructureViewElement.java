@@ -8,8 +8,8 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import iggy.gen.lang.IGGYFile;
-import iggy.gen.psiold.IEbnfElement;
-import iggy.gen.psiold.IRule;
+import iggy.gen.psi.IEbnfElement;
+import iggy.gen.psi.IRule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
