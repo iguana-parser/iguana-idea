@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class IGGYLang extends Language {
     public static final IGGYLang instance = new IGGYLang();
-    public static final Icon file = IconLoader.getIcon("/iggy/gen/icons/iconnew.png");
+    public static final Icon file = IconLoader.getIcon("/iggy/gen/icons/iconnewnew.png");
     private IGGYLang() { super("IGGY"); }
 }
 
