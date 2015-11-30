@@ -11,7 +11,9 @@ import com.intellij.util.indexing.FileBasedIndex;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.lang.IGGYFileType;
 import iggy.gen.psi.INontName$Declaration;
+import iggy.gen.psi.IRule;
 import iggy.gen.psi.impl.EbnfElementImpl;
+import iggy.gen.psi.impl.RuleRegexImpl;
 import iggy.gen.psi.impl.RuleSyntaxImpl;
 
 import java.util.Collection;
@@ -24,19 +26,16 @@ import java.util.List;
 public class IGGYUtil {
 
     public static PsiElement findNontName(Project project, PsiElement element) {
-        Collection<VirtualFile> files = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, IGGYFileType.instance, GlobalSearchScope.allScope(project));
-        for (VirtualFile file : files) {
-            IGGYFile iggyfile = (IGGYFile) PsiManager.getInstance(project).findFile(file);
-            if (iggyfile != null) {
-                EbnfElementImpl[] elements = PsiTreeUtil.getChildrenOfType(iggyfile, EbnfElementImpl.class);
-                if (elements != null) {
-                    List<PsiElement> rules = elements[0].getElements();
-                    for (PsiElement rule : rules) {
-                        if (rule instanceof RuleSyntaxImpl) {
-                            INontName$Declaration decl = ((RuleSyntaxImpl) rule).getNontName$Declaration();
-                            if (decl.getText().equals(element.getText()))
-                                return decl;
-                        }
+        IGGYFile file = (IGGYFile) element.getContainingFile();
+        if (file != null) {
+            EbnfElementImpl[] elements = PsiTreeUtil.getChildrenOfType(file, EbnfElementImpl.class);
+            if (elements != null) {
+                List<PsiElement> rules = elements[0].getElements();
+                for (PsiElement rule : rules) {
+                    if (rule instanceof RuleSyntaxImpl || rule instanceof RuleRegexImpl) {
+                        INontName$Declaration decl = ((IRule) rule).getNontName$Declaration();
+                        if (decl.getText().equals(element.getText()))
+                            return decl;
                     }
                 }
             }
