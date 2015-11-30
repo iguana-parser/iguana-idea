@@ -6,8 +6,8 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IRule extends PsiElement {
-    INontName$Declaration getNontName$Declaration();
+    List<PsiElement> getElementList();
     List<List<PsiElement>> getAllElementList();
+    INontName$Declaration getNontName$Declaration();
     IBody getBody();
-    IRegexBody getRegexBody();
 }

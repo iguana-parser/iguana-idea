@@ -17,8 +17,8 @@ import iggy.gen.psi.IGGYTokenTypes;
 %eof}
 
 
-CHAR=(['-'](([\\-\\][\u0020-\u0020\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\u001F\!-\!#-&\(-\[\]-\u10FFFF])['-'])
-STRING=([\"-\"](([\\-\\][\u0020-\u0020\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\u001F\!-\!#-&\(-\[\]-\u10FFFF])*[\"-\"])
+CHAR=(['-'](([\\-\\][\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\!#-&\(-\[\]-\u10FFFF])*['-'])
+STRING=([\"-\"](([\\-\\][\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\!#-&\(-\[\]-\u10FFFF])*[\"-\"])
 NUMBER=(([1-9][0-9]*)|[0-0])
 RANGECHAR=(([\\-\\][\u0020-\u0020\--\-\[-\]f-fn-nr-rt-t])|[\u0001-\u001F\!-,\.-Z\^-\u10FFFF])
 COMMENT=(([/-/][\*-\*](([\*-\*]*[\u0001-\)\+-\.0-\u10FFFF])|[/-/])*[\*-\*]+[/-/])|([/-/][/-/][\u0001-\u0009\u000B-\u000C\u000E-\u10FFFF]*[\u000A-\u000A\u000D-\u000D]))
@@ -57,11 +57,11 @@ LETTERORDIGITS=([\$-\$A-Z_-_a-z]([\$-\$0-9A-Z_-_a-z]|[\$-\$A-Z_-_a-z])*)
 [\?]	{ return IGGYTokenTypes.TERMINAL; }
 [\+]	{ return IGGYTokenTypes.OPERATOR; }
 [\|]	{ return IGGYTokenTypes.OPERATOR; }
-(\.l)	{ return IGGYTokenTypes.TERMINAL; }
+(\.r)	{ return IGGYTokenTypes.TERMINAL; }
 (\.yield)	{ return IGGYTokenTypes.TERMINAL; }
+(\.l)	{ return IGGYTokenTypes.TERMINAL; }
 (&&)	{ return IGGYTokenTypes.TERMINAL; }
 (\|\|)	{ return IGGYTokenTypes.TERMINAL; }
-(\.r)	{ return IGGYTokenTypes.TERMINAL; }
 (\!\=)	{ return IGGYTokenTypes.TERMINAL; }
 (\=\=)	{ return IGGYTokenTypes.TERMINAL; }
 (<\=)	{ return IGGYTokenTypes.TERMINAL; }

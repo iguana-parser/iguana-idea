@@ -22,13 +22,13 @@ public class RuleSyntaxImpl extends ASTWrapperPsiElement implements IRule {
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public INontName$Declaration getNontName$Declaration() { return findNotNullChildByClass(INontName$Declaration.class); }
+    public List<PsiElement> getElementList() { return null; }
     public List<List<PsiElement>> getAllElementList() {
         List<List<PsiElement>> result = new ArrayList<>();
         for (IEbnfElement e : PsiTreeUtil.getChildrenOfTypeAsList(this, IEbnfElement.class))
             result.add(e.getElements());
         return result;
     }
+    public INontName$Declaration getNontName$Declaration() { return findNotNullChildByClass(INontName$Declaration.class); }
     public IBody getBody() { return findNotNullChildByClass(IBody.class); }
-    public IRegexBody getRegexBody() { return null; }
 }

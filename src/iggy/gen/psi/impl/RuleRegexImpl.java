@@ -22,8 +22,8 @@ public class RuleRegexImpl extends ASTWrapperPsiElement implements IRule {
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public INontName$Declaration getNontName$Declaration() { return findNotNullChildByClass(INontName$Declaration.class); }
+    public List<PsiElement> getElementList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
     public List<List<PsiElement>> getAllElementList() { return null; }
+    public INontName$Declaration getNontName$Declaration() { return null; }
     public IBody getBody() { return null; }
-    public IRegexBody getRegexBody() { return findNotNullChildByClass(IRegexBody.class); }
 }

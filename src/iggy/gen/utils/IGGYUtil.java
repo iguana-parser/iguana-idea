@@ -13,6 +13,7 @@ import iggy.gen.lang.IGGYFileType;
 import iggy.gen.psi.INontName$Declaration;
 import iggy.gen.psi.IRule;
 import iggy.gen.psi.impl.EbnfElementImpl;
+import iggy.gen.psi.impl.NontName$DeclarationImpl;
 import iggy.gen.psi.impl.RuleRegexImpl;
 import iggy.gen.psi.impl.RuleSyntaxImpl;
 
@@ -32,10 +33,15 @@ public class IGGYUtil {
             if (elements != null) {
                 List<PsiElement> rules = elements[0].getElements();
                 for (PsiElement rule : rules) {
-                    if (rule instanceof RuleSyntaxImpl || rule instanceof RuleRegexImpl) {
+                    if (rule instanceof RuleSyntaxImpl) {
                         INontName$Declaration decl = ((IRule) rule).getNontName$Declaration();
                         if (decl.getText().equals(element.getText()))
                             return decl;
+                    } else if (rule instanceof RuleRegexImpl) {
+                        List<PsiElement> l = ((RuleRegexImpl) rule).getElementList();
+                        for (PsiElement elem : l)
+                            if (elem instanceof NontName$DeclarationImpl && elem.getText().equals(element.getText()))
+                                return elem;
                     }
                 }
             }

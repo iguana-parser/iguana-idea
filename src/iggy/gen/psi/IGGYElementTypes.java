@@ -28,6 +28,7 @@ public interface IGGYElementTypes {
     public IElementType REGEX_PLUS = new IGGYElementType("REGEX_PLUS");
     public IElementType NONTNAME$REFERENCE = new IGGYElementType("NONTNAME$REFERENCE");
     public IElementType ALTERNATES = new IGGYElementType("ALTERNATES");
+    public IElementType VARNAME$REFERENCE = new IGGYElementType("VARNAME$REFERENCE");
     public IElementType EXPRESSION_BRACKET = new IGGYElementType("EXPRESSION_BRACKET");
     public IElementType EXPRESSION_CALL = new IGGYElementType("EXPRESSION_CALL");
     public IElementType EXPRESSION_MULTIPLICATION = new IGGYElementType("EXPRESSION_MULTIPLICATION");
@@ -47,7 +48,6 @@ public interface IGGYElementTypes {
     public IElementType EXPRESSION_LESS = new IGGYElementType("EXPRESSION_LESS");
     public IElementType EXPRESSION_MINUS = new IGGYElementType("EXPRESSION_MINUS");
     public IElementType EXPRESSION_LEXTENT = new IGGYElementType("EXPRESSION_LEXTENT");
-    public IElementType VARNAME$REFERENCE = new IGGYElementType("VARNAME$REFERENCE");
     public IElementType SYMBOL_CALL = new IGGYElementType("SYMBOL_CALL");
     public IElementType SYMBOL_NONT = new IGGYElementType("SYMBOL_NONT");
     public IElementType SYMBOL_IGNORE = new IGGYElementType("SYMBOL_IGNORE");
@@ -124,6 +124,7 @@ public interface IGGYElementTypes {
             case "REGEX_PLUS": return REGEX_PLUS;
             case "NONTNAME$REFERENCE": return NONTNAME$REFERENCE;
             case "ALTERNATES": return ALTERNATES;
+            case "VARNAME$REFERENCE": return VARNAME$REFERENCE;
             case "EXPRESSION_BRACKET": return EXPRESSION_BRACKET;
             case "EXPRESSION_CALL": return EXPRESSION_CALL;
             case "EXPRESSION_MULTIPLICATION": return EXPRESSION_MULTIPLICATION;
@@ -143,7 +144,6 @@ public interface IGGYElementTypes {
             case "EXPRESSION_LESS": return EXPRESSION_LESS;
             case "EXPRESSION_MINUS": return EXPRESSION_MINUS;
             case "EXPRESSION_LEXTENT": return EXPRESSION_LEXTENT;
-            case "VARNAME$REFERENCE": return VARNAME$REFERENCE;
             case "SYMBOL_CALL": return SYMBOL_CALL;
             case "SYMBOL_NONT": return SYMBOL_NONT;
             case "SYMBOL_IGNORE": return SYMBOL_IGNORE;
@@ -201,7 +201,7 @@ public interface IGGYElementTypes {
             case "BINDING_ASSIGNMENT": return BINDING_ASSIGNMENT;
             case "BINDING_DECLARATION": return BINDING_DECLARATION;
         }
-        throw new RuntimeException("Should not have happened! Unknown element type: " + name + ".");
+        throw new RuntimeException("Should not have happened!");
     }
 
     class Factory {
@@ -221,6 +221,7 @@ public interface IGGYElementTypes {
             if (type == REGEX_PLUS) return new RegexPlusImpl(node);
             if (type == NONTNAME$REFERENCE) return new NontName$ReferenceImpl(node);
             if (type == ALTERNATES) return new AlternatesImpl(node);
+            if (type == VARNAME$REFERENCE) return new VarName$ReferenceImpl(node);
             if (type == EXPRESSION_BRACKET) return new ExpressionBracketImpl(node);
             if (type == EXPRESSION_CALL) return new ExpressionCallImpl(node);
             if (type == EXPRESSION_MULTIPLICATION) return new ExpressionMultiplicationImpl(node);
@@ -240,7 +241,6 @@ public interface IGGYElementTypes {
             if (type == EXPRESSION_LESS) return new ExpressionLessImpl(node);
             if (type == EXPRESSION_MINUS) return new ExpressionMinusImpl(node);
             if (type == EXPRESSION_LEXTENT) return new ExpressionLExtentImpl(node);
-            if (type == VARNAME$REFERENCE) return new VarName$ReferenceImpl(node);
             if (type == SYMBOL_CALL) return new SymbolCallImpl(node);
             if (type == SYMBOL_NONT) return new SymbolNontImpl(node);
             if (type == SYMBOL_IGNORE) return new SymbolIgnoreImpl(node);
@@ -297,7 +297,7 @@ public interface IGGYElementTypes {
             if (type == LAYOUT) return new LayoutImpl(node);
             if (type == BINDING_ASSIGNMENT) return new BindingAssignmentImpl(node);
             if (type == BINDING_DECLARATION) return new BindingDeclarationImpl(node);
-            throw new RuntimeException("Should not have happened! Unknown node element type: " + type + ".");
+            throw new RuntimeException("Should not have happened!");
         }
     }
 }

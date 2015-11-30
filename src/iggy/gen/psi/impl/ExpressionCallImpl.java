@@ -22,7 +22,6 @@ public class ExpressionCallImpl extends ASTWrapperPsiElement implements IExpress
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IVarName getVarName() { return null; }
     public IVarName$Reference getVarName$Reference() { return null; }
     public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
     public List<IExpression> getAllExpression() { return null; }

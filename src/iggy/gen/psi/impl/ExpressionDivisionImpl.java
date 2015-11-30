@@ -22,7 +22,6 @@ public class ExpressionDivisionImpl extends ASTWrapperPsiElement implements IExp
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IVarName getVarName() { return null; }
     public IVarName$Reference getVarName$Reference() { return null; }
     public IExpression getExpression() { return null; }
     public List<IExpression> getAllExpression() { return PsiTreeUtil.getChildrenOfTypeAsList(this, IExpression.class); }
