@@ -33,7 +33,7 @@
       <annotator language="IGGY" implementationClass="iggy.gen.editor.IGGYAnnotator"/>
       <lang.findUsagesProvider language="IGGY" implementationClass="iggy.gen.editor.IGGYFindUsesProvider"/>
       <!--
-      <lang.psiStructureViewFactory language="IGGY" implementationClass="iggy.gen.psi.IGGYStructureViewFactory"/>
+      <lang.psiStructureViewFactory language="IGGY" implementationClass="iggy.gen.editor.IGGYStructureViewFactory"/>
       -->
   </extensions>
 

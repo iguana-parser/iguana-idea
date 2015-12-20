@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class RegexCharImpl extends ASTWrapperPsiElement implements IRegex {
+public class RegexCharacterImpl extends ASTWrapperPsiElement implements IRegex {
 
-    public RegexCharImpl(ASTNode node) { super(node); }
+    public RegexCharacterImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 

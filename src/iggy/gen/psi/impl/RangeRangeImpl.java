@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class RangeImpl extends ASTWrapperPsiElement implements IRange {
+public class RangeRangeImpl extends ASTWrapperPsiElement implements IRange {
 
-    public RangeImpl(ASTNode node) { super(node); }
+    public RangeRangeImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 

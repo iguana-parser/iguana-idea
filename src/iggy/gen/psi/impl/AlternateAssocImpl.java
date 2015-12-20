@@ -24,5 +24,5 @@ public class AlternateAssocImpl extends ASTWrapperPsiElement implements IAlterna
 
     public ISequence getSequence() { return findNotNullChildByClass(ISequence.class); }
     public List<PsiElement> getSequenceList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
-    public IAssociativity getAssociativity() { return findNotNullChildByClass(IAssociativity.class); }
+    public IAAttribute getAAttribute() { return findNotNullChildByClass(IAAttribute.class); }
 }

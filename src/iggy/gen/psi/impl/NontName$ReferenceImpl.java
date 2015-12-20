@@ -45,9 +45,9 @@ public class NontName$ReferenceImpl extends ASTWrapperPsiElement implements INon
     public String getCanonicalText() { return this.getText(); }
 
     public PsiElement handleElementRename(String name) throws IncorrectOperationException {
-        ASTNode node = IGGYElementFactory.createNontName(getProject(), name);
-        ASTNode child = getNode().getFirstChildNode();
-        getNode().replaceChild(child, node);
+//        ASTNode node = IGGYElementFactory.createNontName(getProject(), name);
+//        ASTNode child = getNode().getFirstChildNode();
+//        getNode().replaceChild(child, node);
         return this;
     }
 
@@ -59,7 +59,10 @@ public class NontName$ReferenceImpl extends ASTWrapperPsiElement implements INon
                  && element.getText().equals(this.getText());
     }
 
-    public Object[] getVariants() { return new Object[0]; }
+    public Object[] getVariants() {
+        System.out.println();
+        return IGGYUtil.findNontNames(getProject(), this);
+    }
 
     public boolean isSoft() { return false; }
 }

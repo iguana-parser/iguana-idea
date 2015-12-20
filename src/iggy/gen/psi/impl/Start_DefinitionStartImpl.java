@@ -16,11 +16,12 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class AltLabelImpl extends ASTWrapperPsiElement implements IAltLabel {
+public class Start_DefinitionStartImpl extends ASTWrapperPsiElement implements IStart_Definition {
 
-    public AltLabelImpl(ASTNode node) { super(node); }
+    public Start_DefinitionStartImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public ILabel getLabel() { return findNotNullChildByClass(ILabel.class); }
+    public List<ILayout> getAllLayout() { return PsiTreeUtil.getChildrenOfTypeAsList(this, ILayout.class); }
+    public IDefinition getDefinition() { return findNotNullChildByClass(IDefinition.class); }
 }

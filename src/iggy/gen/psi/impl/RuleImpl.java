@@ -16,14 +16,15 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class RuleRegexImpl extends ASTWrapperPsiElement implements IRule {
+public class RuleImpl extends ASTWrapperPsiElement implements IRule {
 
-    public RuleRegexImpl(ASTNode node) { super(node); }
+    public RuleImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public List<PsiElement> getElementList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
-    public List<List<PsiElement>> getAllElementList() { return null; }
+    public IRegexRule getRegexRule() { return findChildByClass(IRegexRule.class); }
+    public List<IRegexRule> getRegexRuleList() { return findNotNullChildByClass(IEbnfElement.class).getElements(IRegexRule.class); }
     public INontName$Declaration getNontName$Declaration() { return null; }
+    public List<List<PsiElement>> getAllElementList() { return null; }
     public IBody getBody() { return null; }
 }

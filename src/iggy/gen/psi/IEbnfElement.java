@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IEbnfElement extends PsiElement {
     public List<PsiElement> getElements();
+    public <T extends PsiElement> List<T> getElements(Class<T> type);
 }

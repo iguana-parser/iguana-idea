@@ -26,7 +26,6 @@ public class SymbolNontImpl extends ASTWrapperPsiElement implements ISymbol {
     public List<ISymbol> getAllSymbol() { return null; }
     public ILabel getLabel() { return null; }
     public INontName$Reference getNontName$Reference() { return findNotNullChildByClass(INontName$Reference.class); }
-    public IRegexBody getRegexBody() { return null; }
     public IRegex getRegex() { return null; }
     public List<PsiElement> getExpressionList() { return null; }
     public IVarName$Declaration getVarName$Declaration() { return null; }

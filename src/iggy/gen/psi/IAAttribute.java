@@ -5,5 +5,5 @@ package iggy.gen.psi;
 import com.intellij.psi.PsiElement;
 import java.util.List;
 
-public interface IAssociativity extends PsiElement {
+public interface IAAttribute extends PsiElement {
 }

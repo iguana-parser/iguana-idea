@@ -6,6 +6,6 @@ import com.intellij.psi.PsiElement;
 import java.util.List;
 
 public interface IAttribute extends PsiElement {
-    IAssociativity getAssociativity();
-    ILabel getLabel();
+    ILAttribute getLAttribute();
+    IAAttribute getAAttribute();
 }

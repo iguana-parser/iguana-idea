@@ -16,12 +16,10 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class AttributeLabelImpl extends ASTWrapperPsiElement implements IAttribute {
+public class AAttributeAssocImpl extends ASTWrapperPsiElement implements IAAttribute {
 
-    public AttributeLabelImpl(ASTNode node) { super(node); }
+    public AAttributeAssocImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IAssociativity getAssociativity() { return null; }
-    public ILabel getLabel() { return findNotNullChildByClass(ILabel.class); }
 }

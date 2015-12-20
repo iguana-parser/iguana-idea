@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class AssociativityImpl extends ASTWrapperPsiElement implements IAssociativity {
+public class RegexSequenceSequenceImpl extends ASTWrapperPsiElement implements IRegexSequence {
 
-    public AssociativityImpl(ASTNode node) { super(node); }
+    public RegexSequenceSequenceImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
+    public List<PsiElement> getRegexList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

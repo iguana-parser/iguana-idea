@@ -20,6 +20,7 @@ import iggy.gen.psi.IGGYTokenTypes;
 CHAR=(['-'](([\\-\\][\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\!#-&\(-\[\]-\u10FFFF])*['-'])
 STRING=([\"-\"](([\\-\\][\"-\"'-'\\-\\f-fn-nr-rt-t])|[\u0001-\!#-&\(-\[\]-\u10FFFF])*[\"-\"])
 NUMBER=(([1-9][0-9]*)|[0-0])
+ASSOCIATIVITY=(([n-n][o-o][n-n][\--\-][a-a][s-s][s-s][o-o][c-c])|([r-r][i-i][g-g][h-h][t-t])|([l-l][e-e][f-f][t-t]))
 RANGECHAR=(([\\-\\][\u0020-\u0020\--\-\[-\]f-fn-nr-rt-t])|[\u0001-\u001F\!-,\.-Z\^-\u10FFFF])
 COMMENT=(([/-/][\*-\*](([\*-\*]*[\u0001-\)\+-\.0-\u10FFFF])|[/-/])*[\*-\*]+[/-/])|([/-/][/-/][\u0001-\u0009\u000B-\u000C\u000E-\u10FFFF]*[\u000A-\u000A\u000D-\u000D]))
 WHITESPACES=[\u0009-\u000A\u000C-\u000D\u0020-\u0020]+
@@ -28,17 +29,15 @@ LETTERORDIGITS=([\$-\$A-Z_-_a-z]([\$-\$0-9A-Z_-_a-z]|[\$-\$A-Z_-_a-z])*)
 %%
 
 <YYINITIAL> {
-(regex)	{ return IGGYTokenTypes.KEYWORD; }
-(offside)	{ return IGGYTokenTypes.KEYWORD; }
 (align)	{ return IGGYTokenTypes.KEYWORD; }
 (ignore)	{ return IGGYTokenTypes.KEYWORD; }
-(left)	{ return IGGYTokenTypes.KEYWORD; }
-(non\-assoc)	{ return IGGYTokenTypes.KEYWORD; }
-(right)	{ return IGGYTokenTypes.KEYWORD; }
+(offside)	{ return IGGYTokenTypes.KEYWORD; }
+(regex)	{ return IGGYTokenTypes.KEYWORD; }
 (var)	{ return IGGYTokenTypes.KEYWORD; }
 {CHAR} 	{ return IGGYTokenTypes.CHAR; }
 {STRING} 	{ return IGGYTokenTypes.STRING; }
 {NUMBER} 	{ return IGGYTokenTypes.NUMBER; }
+{ASSOCIATIVITY} 	{ return IGGYTokenTypes.ASSOCIATIVITY; }
 {RANGECHAR} 	{ return IGGYTokenTypes.RANGECHAR; }
 {COMMENT} 	{ return IGGYTokenTypes.COMMENT; }
 {WHITESPACES} 	{ return IGGYTokenTypes.WHITESPACES; }
@@ -51,6 +50,7 @@ LETTERORDIGITS=([\$-\$A-Z_-_a-z]([\$-\$0-9A-Z_-_a-z]|[\$-\$A-Z_-_a-z])*)
 (non\-assoc)	{ return IGGYTokenTypes.TERMINAL; }
 (regex)	{ return IGGYTokenTypes.TERMINAL; }
 (left)	{ return IGGYTokenTypes.TERMINAL; }
+(::\=)	{ return IGGYTokenTypes.TERMINAL; }
 [\*]	{ return IGGYTokenTypes.TERMINAL; }
 [\(]	{ return IGGYTokenTypes.OPEN_PARENTHESIS; }
 [\)]	{ return IGGYTokenTypes.CLOSE_PARENTHESIS; }
@@ -71,19 +71,18 @@ LETTERORDIGITS=([\$-\$A-Z_-_a-z]([\$-\$0-9A-Z_-_a-z]|[\$-\$A-Z_-_a-z])*)
 [\-]	{ return IGGYTokenTypes.OPERATOR; }
 [/]	{ return IGGYTokenTypes.OPERATOR; }
 [\!]	{ return IGGYTokenTypes.TERMINAL; }
-[\{]	{ return IGGYTokenTypes.OPEN_BRACE; }
-[\}]	{ return IGGYTokenTypes.CLOSE_BRACE; }
+(>>)	{ return IGGYTokenTypes.TERMINAL; }
 [\\]	{ return IGGYTokenTypes.TERMINAL; }
 (\!>>)	{ return IGGYTokenTypes.TERMINAL; }
-(>>)	{ return IGGYTokenTypes.TERMINAL; }
 [\[]	{ return IGGYTokenTypes.OPEN_BRACKET; }
 [,]	{ return IGGYTokenTypes.TERMINAL; }
 [\]]	{ return IGGYTokenTypes.CLOSE_BRACKET; }
 (<<)	{ return IGGYTokenTypes.TERMINAL; }
 [:]	{ return IGGYTokenTypes.TERMINAL; }
+[\{]	{ return IGGYTokenTypes.OPEN_BRACE; }
+[\}]	{ return IGGYTokenTypes.CLOSE_BRACE; }
 (\!<<)	{ return IGGYTokenTypes.TERMINAL; }
 [\=]	{ return IGGYTokenTypes.TERMINAL; }
-(::\=)	{ return IGGYTokenTypes.TERMINAL; }
 (@NoLayout)	{ return IGGYTokenTypes.TERMINAL; }
 (@Layout)	{ return IGGYTokenTypes.TERMINAL; }
 (\[\^)	{ return IGGYTokenTypes.TERMINAL; }

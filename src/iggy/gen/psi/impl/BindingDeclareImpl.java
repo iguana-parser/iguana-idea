@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class BindingDeclarationImpl extends ASTWrapperPsiElement implements IBinding {
+public class BindingDeclareImpl extends ASTWrapperPsiElement implements IBinding {
 
-    public BindingDeclarationImpl(ASTNode node) { super(node); }
+    public BindingDeclareImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IVarName$Declaration getVarName$Declaration() { return findNotNullChildByClass(IVarName$Declaration.class); }
-    public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
     public IVarName$Reference getVarName$Reference() { return null; }
+    public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
+    public IVarName$Declaration getVarName$Declaration() { return findNotNullChildByClass(IVarName$Declaration.class); }
 }

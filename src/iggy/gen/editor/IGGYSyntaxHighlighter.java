@@ -50,6 +50,8 @@ public class IGGYSyntaxHighlighter extends SyntaxHighlighterBase {
             return new TextAttributesKey[] {TextAttributesKey.createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.IDENTIFIER)};
         else if (tokenType.equals(IGGYTokenTypes.BAD_CHARACTER))
             return new TextAttributesKey[] {TextAttributesKey.createTextAttributesKey("BAD_CHARACTER", HighlighterColors.TEXT)};
+        else if (tokenType.equals(IGGYTokenTypes.ASSOCIATIVITY))
+            return new TextAttributesKey[] {TextAttributesKey.createTextAttributesKey("ASSOCIATIVITY", DefaultLanguageHighlighterColors.IDENTIFIER)};
         return new TextAttributesKey[0];
     }
 }

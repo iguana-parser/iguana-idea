@@ -16,11 +16,10 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class DefinitionImpl extends ASTWrapperPsiElement implements IDefinition {
+public class RangeCharacterImpl extends ASTWrapperPsiElement implements IRange {
 
-    public DefinitionImpl(ASTNode node) { super(node); }
+    public RangeCharacterImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public List<IRule> getRuleList() { return findNotNullChildByClass(IEbnfElement.class).getElements(IRule.class); }
 }

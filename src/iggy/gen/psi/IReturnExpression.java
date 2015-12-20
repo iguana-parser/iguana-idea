@@ -5,6 +5,6 @@ package iggy.gen.psi;
 import com.intellij.psi.PsiElement;
 import java.util.List;
 
-public interface IAltLabel extends PsiElement {
-    ILabel getLabel();
+public interface IReturnExpression extends PsiElement {
+    IExpression getExpression();
 }

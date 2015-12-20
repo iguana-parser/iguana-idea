@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class SymbolCharImpl extends ASTWrapperPsiElement implements ISymbol {
+public class SymbolCharacterImpl extends ASTWrapperPsiElement implements ISymbol {
 
-    public SymbolCharImpl(ASTNode node) { super(node); }
+    public SymbolCharacterImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
@@ -26,7 +26,6 @@ public class SymbolCharImpl extends ASTWrapperPsiElement implements ISymbol {
     public List<ISymbol> getAllSymbol() { return null; }
     public ILabel getLabel() { return null; }
     public INontName$Reference getNontName$Reference() { return null; }
-    public IRegexBody getRegexBody() { return null; }
     public IRegex getRegex() { return null; }
     public List<PsiElement> getExpressionList() { return null; }
     public IVarName$Declaration getVarName$Declaration() { return null; }

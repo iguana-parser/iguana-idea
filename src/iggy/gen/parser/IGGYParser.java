@@ -8,11 +8,12 @@ import com.intellij.lang.PsiParser;
 import com.intellij.psi.impl.source.tree.Factory;
 import com.intellij.psi.tree.IElementType;
 import iguana.parsetrees.sppf.NonterminalNode;
-import iguana.parsetrees.tree.TermBuilder;
+import iguana.parsetrees.term.SPPFToTerms;
 import iguana.utils.input.Input;
 import org.iguana.grammar.Grammar;
 import org.iguana.grammar.GrammarGraph;
 import org.iguana.grammar.symbol.Nonterminal;
+import org.iguana.grammar.symbol.Start;
 import org.iguana.grammar.transformation.DesugarPrecedenceAndAssociativity;
 import org.iguana.grammar.transformation.EBNFToBNF;
 import org.iguana.grammar.transformation.LayoutWeaver;
@@ -24,6 +25,7 @@ import org.iguana.util.Configuration;
 public class IGGYParser implements PsiParser {
 
     private Grammar grammar;
+    private Start start;
     private GrammarGraph graph;
 
     public ASTNode parse(IElementType root, PsiBuilder builder) {
@@ -36,13 +38,14 @@ public class IGGYParser implements PsiParser {
             grammar = precedenceAndAssociativity.transform(grammar);
             grammar = new Names().transform(grammar);
             grammar = new LayoutWeaver().transform(grammar);
+            start = grammar.getStartSymbol(Nonterminal.withName("Definition"));
             graph = GrammarGraph.from(grammar, input, Configuration.DEFAULT);
         }
-        ParseResult result = Iguana.parse(input, graph, Nonterminal.withName("Definition"));
+        ParseResult result = Iguana.parse(input, graph, start);
         if (result.isParseSuccess()) {
             System.out.println("Success...");
             NonterminalNode sppf = result.asParseSuccess().getSPPFNode();
-            ASTNode ast = TermBuilder.build_no_memo(sppf, new IGGYTreeBuilder());
+            ASTNode ast = SPPFToTerms.convertNoSharing(sppf, new IGGYTermBuilder());
             return ast;
         } else {
             System.out.println("Parse error...");

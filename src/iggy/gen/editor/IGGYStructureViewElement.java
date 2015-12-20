@@ -3,15 +3,21 @@ package iggy.gen.editor;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.navigation.ColoredItemPresentation;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.editor.HighlighterColors;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.IEbnfElement;
 import iggy.gen.psi.IRule;
+import iggy.gen.psi.impl.NontName$DeclarationImpl;
+import iggy.gen.psi.impl.RuleSyntaxImpl;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +64,27 @@ public class IGGYStructureViewElement implements StructureViewTreeElement, Sorta
 
     @Override
     public ItemPresentation getPresentation() {
-        return element instanceof NavigationItem? ((NavigationItem) element).getPresentation() : null;
+        // return element instanceof NavigationItem? ((NavigationItem) element).getPresentation() : null;
+        return new ColoredItemPresentation() {
+            @Override
+            public TextAttributesKey getTextAttributesKey() {
+                return TextAttributesKey.createTextAttributesKey("NONTNAME_RESOLVED", HighlighterColors.TEXT);
+            }
+
+            public String getPresentableText() {
+                if (element instanceof NontName$DeclarationImpl)
+                    return ((NontName$DeclarationImpl) element).getName();
+                return "";
+            }
+
+            public String getLocationString() {
+                return null;
+            }
+
+            public Icon getIcon(boolean open) {
+                return element.getIcon(0);
+            }
+        };
     }
 
     @NotNull
@@ -68,8 +94,8 @@ public class IGGYStructureViewElement implements StructureViewTreeElement, Sorta
             List<TreeElement> treeElements = new ArrayList<>();
             List<PsiElement> elements = ((IEbnfElement) ((IGGYFile) element).getFirstChild()).getElements();
             for (PsiElement element : elements) {
-                if (element instanceof IRule)
-                    treeElements.add(new IGGYStructureViewElement(element));
+                if (element instanceof RuleSyntaxImpl)
+                    treeElements.add(new IGGYStructureViewElement(((RuleSyntaxImpl)element).getNontName$Declaration()));
             }
             return treeElements.toArray(new TreeElement[treeElements.size()]);
         }

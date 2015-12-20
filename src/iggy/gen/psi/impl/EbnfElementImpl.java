@@ -29,4 +29,8 @@ public class EbnfElementImpl extends ASTWrapperPsiElement implements IEbnfElemen
         }
         return flattened;
     }
+
+    public <T extends PsiElement> List<T> getElements(Class<T> type) {
+        return PsiTreeUtil.getChildrenOfTypeAsList(this, type);
+    }
 }

@@ -11,12 +11,12 @@ import com.intellij.util.indexing.FileBasedIndex;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.lang.IGGYFileType;
 import iggy.gen.psi.INontName$Declaration;
+import iggy.gen.psi.IRegexRule;
 import iggy.gen.psi.IRule;
-import iggy.gen.psi.impl.EbnfElementImpl;
-import iggy.gen.psi.impl.NontName$DeclarationImpl;
-import iggy.gen.psi.impl.RuleRegexImpl;
-import iggy.gen.psi.impl.RuleSyntaxImpl;
+import iggy.gen.psi.impl.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,24 +29,59 @@ public class IGGYUtil {
     public static PsiElement findNontName(Project project, PsiElement element) {
         IGGYFile file = (IGGYFile) element.getContainingFile();
         if (file != null) {
-            EbnfElementImpl[] elements = PsiTreeUtil.getChildrenOfType(file, EbnfElementImpl.class);
-            if (elements != null) {
-                List<PsiElement> rules = elements[0].getElements();
-                for (PsiElement rule : rules) {
-                    if (rule instanceof RuleSyntaxImpl) {
-                        INontName$Declaration decl = ((IRule) rule).getNontName$Declaration();
+            DefinitionImpl definition = PsiTreeUtil.getChildOfType(file, DefinitionImpl.class);
+            List<IRule> elements = definition.getRuleList();
+            for (IRule elem : elements) {
+                if (elem instanceof RuleSyntaxImpl) {
+                    INontName$Declaration decl = elem.getNontName$Declaration();
+                    if (decl.getText().equals(element.getText()))
+                        return decl;
+                } else if (elem instanceof RuleImpl) {
+                    IRegexRule rule = elem.getRegexRule();
+                    if (rule == null) {
+                        List<IRegexRule> elems = elem.getRegexRuleList();
+                        for (IRegexRule e : elems) {
+                            INontName$Declaration decl = e.getNontName$Declaration();
+                            if (decl.getText().equals(element.getText()))
+                                return decl;
+                        }
+                    } else {
+                        INontName$Declaration decl = rule.getNontName$Declaration();
                         if (decl.getText().equals(element.getText()))
                             return decl;
-                    } else if (rule instanceof RuleRegexImpl) {
-                        List<PsiElement> l = ((RuleRegexImpl) rule).getElementList();
-                        for (PsiElement elem : l)
-                            if (elem instanceof NontName$DeclarationImpl && elem.getText().equals(element.getText()))
-                                return elem;
                     }
                 }
             }
         }
         return null;
+    }
+
+    public static String[] findNontNames(Project project, PsiElement element) {
+        IGGYFile file = (IGGYFile) element.getContainingFile();
+        List<String> names = new ArrayList<>();
+        if (file != null) {
+            DefinitionImpl definition = PsiTreeUtil.getChildOfType(file, DefinitionImpl.class);
+            List<IRule> elements = definition.getRuleList();
+            for (IRule elem : elements) {
+                if (elem instanceof RuleSyntaxImpl) {
+                    INontName$Declaration decl = elem.getNontName$Declaration();
+                    names.add(decl.getText());
+                } else if (elem instanceof RuleImpl) {
+                    IRegexRule rule = elem.getRegexRule();
+                    if (rule == null) {
+                        List<IRegexRule> elems = elem.getRegexRuleList();
+                        for (IRegexRule e : elems) {
+                            INontName$Declaration decl = e.getNontName$Declaration();
+                            names.add(decl.getText());
+                        }
+                    } else {
+                        INontName$Declaration decl = rule.getNontName$Declaration();
+                        names.add(decl.getText());
+                    }
+                }
+            }
+        }
+        return names.stream().toArray(String[]::new);
     }
 
     public static PsiElement findVarName(Project project, PsiElement element) {

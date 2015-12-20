@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class SequenceImpl extends ASTWrapperPsiElement implements ISequence {
+public class SequenceMoreThanTwoImpl extends ASTWrapperPsiElement implements ISequence {
 
-    public SequenceImpl(ASTNode node) { super(node); }
+    public SequenceMoreThanTwoImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 

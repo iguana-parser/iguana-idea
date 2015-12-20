@@ -26,7 +26,6 @@ public class SymbolConstraintsImpl extends ASTWrapperPsiElement implements ISymb
     public List<ISymbol> getAllSymbol() { return null; }
     public ILabel getLabel() { return null; }
     public INontName$Reference getNontName$Reference() { return null; }
-    public IRegexBody getRegexBody() { return null; }
     public IRegex getRegex() { return null; }
     public List<PsiElement> getExpressionList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
     public IVarName$Declaration getVarName$Declaration() { return null; }

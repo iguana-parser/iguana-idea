@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 import iggy.gen.psi.*;
 
-public class ReturnImpl extends ASTWrapperPsiElement implements IReturn {
+public class SymbolsSequenceImpl extends ASTWrapperPsiElement implements ISymbols {
 
-    public ReturnImpl(ASTNode node) { super(node); }
+    public SymbolsSequenceImpl(ASTNode node) { super(node); }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
-    public IExpression getExpression() { return findNotNullChildByClass(IExpression.class); }
+    public List<PsiElement> getSymbolList() { return findNotNullChildByClass(IEbnfElement.class).getElements(); }
 }

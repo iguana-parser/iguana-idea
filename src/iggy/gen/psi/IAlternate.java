@@ -8,5 +8,5 @@ import java.util.List;
 public interface IAlternate extends PsiElement {
     ISequence getSequence();
     List<PsiElement> getSequenceList();
-    IAssociativity getAssociativity();
+    IAAttribute getAAttribute();
 }

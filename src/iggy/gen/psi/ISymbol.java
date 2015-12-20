@@ -10,7 +10,6 @@ public interface ISymbol extends PsiElement {
     List<ISymbol> getAllSymbol();
     ILabel getLabel();
     INontName$Reference getNontName$Reference();
-    IRegexBody getRegexBody();
     IRegex getRegex();
     List<PsiElement> getExpressionList();
     IVarName$Declaration getVarName$Declaration();
