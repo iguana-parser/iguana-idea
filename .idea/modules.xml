@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../iguana/iguana.iml" filepath="$PROJECT_DIR$/../iguana/iguana.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/.idea/modules/iguana.iml" filepath="$PROJECT_DIR$/../iguana/.idea/modules/iguana.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/.idea/modules/iguana-build.iml" filepath="$PROJECT_DIR$/../iguana/.idea/modules/iguana-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/iguana-idea.iml" filepath="$PROJECT_DIR$/iguana-idea.iml" />
       <module fileurl="file://$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees.iml" filepath="$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../utils/utils.iml" filepath="$PROJECT_DIR$/../utils/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees-build.iml" filepath="$PROJECT_DIR$/../parse-trees/.idea/modules/parse-trees-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/.idea/modules/regex.iml" filepath="$PROJECT_DIR$/../iguana/.idea/modules/regex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/.idea/modules/regex-build.iml" filepath="$PROJECT_DIR$/../iguana/.idea/modules/regex-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../iguana/.idea/modules/utils.iml" filepath="$PROJECT_DIR$/../iguana/.idea/modules/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../parse-trees/.idea/modules/utils-build.iml" filepath="$PROJECT_DIR$/../parse-trees/.idea/modules/utils-build.iml" />
     </modules>
   </component>
 </project>
