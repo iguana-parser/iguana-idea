@@ -2,16 +2,21 @@ package iggy.gen.parser;
 
 /* This file has been generated. */
 
+import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.Factory;
 import com.intellij.psi.tree.IElementType;
+import iggy.gen.psi.IGGYElementTypes;
+import iggy.gen.psi.IGGYTokenTypes;
 import iguana.parsetrees.sppf.NonterminalNode;
 import iguana.parsetrees.term.SPPFToTerms;
 import iguana.utils.input.Input;
 import org.iguana.grammar.Grammar;
 import org.iguana.grammar.GrammarGraph;
+import org.iguana.grammar.slot.NonterminalGrammarSlot;
 import org.iguana.grammar.symbol.Nonterminal;
 import org.iguana.grammar.symbol.Start;
 import org.iguana.grammar.transformation.DesugarPrecedenceAndAssociativity;
@@ -49,7 +54,27 @@ public class IGGYParser implements PsiParser {
             return ast;
         } else {
             System.out.println("Parse error...");
-            return Factory.createErrorElement("Sorry, you have a parse error.");
+            NonterminalNode l = graph.getHead(Nonterminal.withName("Layout"))
+                    .getGSSNode(0).getNonterminalNode(input);
+            if (l != null) {
+                NonterminalNode sppf = graph.getHead(Nonterminal.withName("Rule+"))
+                        .getGSSNode(l.getRightExtent()).getNonterminalNode(input);
+                if (sppf != null) {
+                    CompositeElement startNode = ASTFactory.composite(IGGYElementTypes.get("START_DEFINITION_START"));
+                    startNode.rawAddChildrenWithoutNotifications(SPPFToTerms.convertNoSharing(l, new IGGYTermBuilder()));
+                    CompositeElement node = ASTFactory.composite(IGGYElementTypes.get("DEFINITION"));
+                    CompositeElement child = (CompositeElement) SPPFToTerms.convertNoSharing(sppf, new IGGYTermBuilder());
+                    CompositeElement error = Factory.createErrorElement("Sorry, you have a parse error.");
+                    node.rawAddChildrenWithoutNotifications(child);
+                    startNode.rawAddChildrenWithoutNotifications(node);
+                    startNode.rawAddChildrenWithoutNotifications(error);
+                    error.rawAddChildrenWithoutNotifications(ASTFactory.leaf(IGGYTokenTypes.TERMINAL, input.subString(sppf.getRightExtent(), input.length())));
+                    return startNode;
+                }
+            }
+            CompositeElement ast = Factory.createErrorElement("Sorry, you have a parse error.");
+            ast.rawAddChildrenWithoutNotifications(ASTFactory.leaf(IGGYTokenTypes.TERMINAL, input.toString()));
+            return ast;
         }
     }
 }
