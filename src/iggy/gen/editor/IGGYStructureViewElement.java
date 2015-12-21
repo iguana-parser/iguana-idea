@@ -10,10 +10,15 @@ import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.IEbnfElement;
+import iggy.gen.psi.INontName$Declaration;
+import iggy.gen.psi.IRegexRule;
 import iggy.gen.psi.IRule;
+import iggy.gen.psi.impl.DefinitionImpl;
 import iggy.gen.psi.impl.NontName$DeclarationImpl;
+import iggy.gen.psi.impl.RuleImpl;
 import iggy.gen.psi.impl.RuleSyntaxImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -92,10 +97,21 @@ public class IGGYStructureViewElement implements StructureViewTreeElement, Sorta
     public TreeElement[] getChildren() {
         if (element instanceof IGGYFile) {
             List<TreeElement> treeElements = new ArrayList<>();
-            List<PsiElement> elements = ((IEbnfElement) ((IGGYFile) element).getFirstChild()).getElements();
-            for (PsiElement element : elements) {
-                if (element instanceof RuleSyntaxImpl)
-                    treeElements.add(new IGGYStructureViewElement(((RuleSyntaxImpl)element).getNontName$Declaration()));
+            IGGYFile file = (IGGYFile) element;
+            DefinitionImpl definition = PsiTreeUtil.getChildOfType(file, DefinitionImpl.class);
+            List<IRule> elements = definition.getRuleList();
+            for (IRule elem : elements) {
+                if (elem instanceof RuleSyntaxImpl)
+                    treeElements.add(new IGGYStructureViewElement(elem.getNontName$Declaration()));
+                else if (elem instanceof RuleImpl) {
+                    IRegexRule rule = elem.getRegexRule();
+                    if (rule == null) {
+                        List<IRegexRule> elems = elem.getRegexRuleList();
+                        for (IRegexRule e : elems)
+                            treeElements.add(new IGGYStructureViewElement(e.getNontName$Declaration()));
+                    } else
+                        treeElements.add(new IGGYStructureViewElement(rule.getNontName$Declaration()));
+                }
             }
             return treeElements.toArray(new TreeElement[treeElements.size()]);
         }

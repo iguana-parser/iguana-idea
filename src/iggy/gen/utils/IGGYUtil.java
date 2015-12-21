@@ -56,7 +56,7 @@ public class IGGYUtil {
         return null;
     }
 
-    public static String[] findNontNames(Project project, PsiElement element) {
+    public static List<String> findNontNames(Project project, PsiElement element) {
         IGGYFile file = (IGGYFile) element.getContainingFile();
         List<String> names = new ArrayList<>();
         if (file != null) {
@@ -81,7 +81,7 @@ public class IGGYUtil {
                 }
             }
         }
-        return names.stream().toArray(String[]::new);
+        return names;
     }
 
     public static PsiElement findVarName(Project project, PsiElement element) {

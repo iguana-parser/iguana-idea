@@ -2,6 +2,8 @@ package iggy.gen.psi.impl;
 
 /* This file has been generated. */
 
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -13,6 +15,8 @@ import com.intellij.openapi.util.TextRange;
 
 import com.intellij.util.IncorrectOperationException;
 
+import iggy.gen.lang.IGGYFile;
+import iggy.gen.lang.IGGYLang;
 import iggy.gen.utils.IGGYElementFactory;
 import iggy.gen.utils.IGGYUtil;
 
@@ -23,7 +27,9 @@ import iggy.gen.psi.*;
 
 public class NontName$ReferenceImpl extends ASTWrapperPsiElement implements INontName$Reference {
 
-    public NontName$ReferenceImpl(ASTNode node) { super(node); }
+    public NontName$ReferenceImpl(ASTNode node) {
+        super(node);
+    }
 
     public void accept(PsiElementVisitor visitor) { super.accept(visitor); }
 
@@ -45,9 +51,9 @@ public class NontName$ReferenceImpl extends ASTWrapperPsiElement implements INon
     public String getCanonicalText() { return this.getText(); }
 
     public PsiElement handleElementRename(String name) throws IncorrectOperationException {
-//        ASTNode node = IGGYElementFactory.createNontName(getProject(), name);
-//        ASTNode child = getNode().getFirstChildNode();
-//        getNode().replaceChild(child, node);
+        ASTNode node = IGGYElementFactory.createNontName(getProject(), name);
+        ASTNode child = getNode().getFirstChildNode();
+        getNode().replaceChild(child, node);
         return this;
     }
 
@@ -60,8 +66,9 @@ public class NontName$ReferenceImpl extends ASTWrapperPsiElement implements INon
     }
 
     public Object[] getVariants() {
-        System.out.println();
-        return IGGYUtil.findNontNames(getProject(), this);
+        return IGGYUtil.findNontNames(getProject(), this).stream()
+                .map(v -> LookupElementBuilder.create(v)
+                        .withIcon(IGGYLang.file)).toArray(LookupElement[]::new);
     }
 
     public boolean isSoft() { return false; }

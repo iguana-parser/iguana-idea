@@ -4,10 +4,11 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.util.PsiTreeUtil;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.lang.IGGYFileType;
-import iggy.gen.psi.IEbnfElement;
 import iggy.gen.psi.IRule;
+import iggy.gen.psi.impl.DefinitionImpl;
 
 /**
  * Created by Anastasia Izmaylova on 29/11/15.
@@ -16,8 +17,8 @@ public class IGGYElementFactory {
 
     public static ASTNode createNontName(Project project, String name) {
         IGGYFile file = createFile(project, name + "::=");
-        IEbnfElement rules = (IEbnfElement) file.getFirstChild();
-        IRule rule = (IRule) rules.getElements().get(0);
+        DefinitionImpl definition = PsiTreeUtil.getChildOfType(file, DefinitionImpl.class);
+        IRule rule = definition.getRuleList().get(0);
         PsiElement nont = rule.getNontName$Declaration().getFirstChild();
         return nont.getNode();
     }
