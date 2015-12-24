@@ -24,7 +24,9 @@ public class IGGYTermBuilder implements TermBuilder<TreeElement> {
             IElementType tokenType = IGGYTokenTypes.get(type.name());
             return ASTFactory.leaf(tokenType, input.subString(l, r));
         }
-    return ASTFactory.leaf(IGGYTokenTypes.TERMINAL, input.subString(l, r));
+        if (type.nodeType() == TerminalNodeType.Keyword())
+            return ASTFactory.leaf(IGGYTokenTypes.KEYWORD, input.subString(l, r));
+        return ASTFactory.leaf(IGGYTokenTypes.TERMINAL, input.subString(l, r));
     }
 
     @Override

@@ -48,6 +48,20 @@
         </value>
     </option>
 
+    <option name="NONTNAME_RESOLVED_NAME_IN_STRING_LITERAL">
+        <value>
+            <!--<option name="FOREGROUND" value="004d00"/>-->
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+
+    <option name="NONTNAME_UNRESOLVED_NAME_IN_STRING_LITERAL">
+        <value>
+            <option name="FOREGROUND" value="009900"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
+
     <option name="VARNAME_RESOLVED_NAME">
         <value>
             <option name="FOREGROUND" value="000000"/>
