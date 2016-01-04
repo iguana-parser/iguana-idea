@@ -8,11 +8,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="parse-trees" exported="" />
-    <orderEntry type="module" module-name="utils" exported="" />
-    <orderEntry type="library" exported="" name="scala-sdk-2.11.7" level="application" />
-    <orderEntry type="module" module-name="iguana" exported="" />
-    <orderEntry type="module" module-name="regex" exported="" />
+    <orderEntry type="module" module-name="parse-trees" />
+    <orderEntry type="module" module-name="utils" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="scala-sdk-2.11.7" level="application" />
+    <orderEntry type="module" module-name="iguana" />
+    <orderEntry type="module" module-name="regex" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="scala-plugin" level="application" />
   </component>
 </module>

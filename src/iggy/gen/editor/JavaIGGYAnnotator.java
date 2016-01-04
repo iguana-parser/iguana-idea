@@ -12,35 +12,24 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiLiteralExpression;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.IGGYTokenTypes;
 import iggy.gen.psi.INontName$Declaration;
-import iggy.gen.psi.IRegexRule;
-import iggy.gen.psi.IRule;
-import iggy.gen.psi.impl.DefinitionImpl;
 import iggy.gen.psi.impl.NontName$ReferenceImpl;
-import iggy.gen.psi.impl.RuleImpl;
-import iggy.gen.psi.impl.RuleSyntaxImpl;
 import iggy.gen.utils.IGGYElementFactory;
-import org.jetbrains.plugins.scala.lang.lexer.ScalaTokenTypes;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by anastasiaizmaylova on 23/12/15.
+ * Created by Anastasia Izmaylova on 23/12/15.
  */
-public class JIGGYAnnotator implements Annotator {
+public class JavaIGGYAnnotator implements Annotator {
     @Override
     public void annotate(PsiElement element, AnnotationHolder holder) {
-        // element instanceof LeafPsiElement && element.getType() == ScalaTokenTypes.tSTRING
         if (element instanceof PsiLiteralExpression) {
             String value = (String) ((PsiLiteralExpression) element).getValue();
             int offset = 5;
             if (value != null && value.startsWith("IGGY:")) {
-                Project project = element.getProject();
-                IGGYFile file = IGGYElementFactory.createFile(project, value.substring(offset));
+                IGGYFile file = IGGYElementFactory.createFile(element.getProject(), value.substring(offset));
                 if (file != null)
                     file.accept(new Visitor(holder, element.getTextRange().getStartOffset() + offset));
             }

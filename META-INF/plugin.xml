@@ -23,6 +23,7 @@
   <!-- uncomment to enable plugin in all products
   <depends>com.intellij.modules.lang</depends>
   -->
+    <depends>org.intellij.scala</depends>
 
   <extensions defaultExtensionNs="com.intellij">
       <!-- Add your extensions here -->
@@ -31,11 +32,12 @@
       <additionalTextAttributes scheme="Default" file="iggy/gen/editor/colors/iguana-colors.xml"/>
       <lang.parserDefinition language="IGGY" implementationClass="iggy.gen.parser.IGGYParserDefinition"/>
       <annotator language="IGGY" implementationClass="iggy.gen.editor.IGGYAnnotator"/>
-      <annotator language="JAVA" implementationClass="iggy.gen.editor.JIGGYAnnotator"/>
-      <annotator language="Scala" implementationClass="iggy.gen.editor.JIGGYAnnotator"/>
+      <annotator language="JAVA" implementationClass="iggy.gen.editor.JavaIGGYAnnotator"/>
       <lang.findUsagesProvider language="IGGY" implementationClass="iggy.gen.editor.IGGYFindUsesProvider"/>
       <lang.psiStructureViewFactory language="IGGY" implementationClass="iggy.gen.editor.IGGYStructureViewFactory"/>
       <completion.contributor language="IGGY" implementationClass="iggy.gen.editor.IGGYCompletionConstributor"/>
+      <completion.contributor language="JAVA" implementationClass="iggy.gen.editor.JavaIGGYCompletionContributor"/>
+      <completion.contributor language="Scala" implementationClass="iggy.gen.editor.ScalaIGGYCompletionContributor"/>
   </extensions>
 
   <application-components>
