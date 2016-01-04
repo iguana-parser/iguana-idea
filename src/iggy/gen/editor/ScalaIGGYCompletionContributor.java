@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.impl.NontName$ReferenceImpl;
@@ -15,6 +16,12 @@ import iggy.gen.utils.IGGYUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.scala.ScalaLanguage;
 import org.jetbrains.plugins.scala.lang.lexer.ScalaTokenTypes;
+import org.jetbrains.plugins.scala.lang.parser.parsing.expressions.Annotation;
+import org.jetbrains.plugins.scala.lang.psi.api.expr.ScAnnotation;
+import org.jetbrains.plugins.scala.lang.psi.api.statements.ScPatternDefinition;
+import org.jetbrains.plugins.scala.lang.psi.impl.expr.ScAnnotationImpl;
+import org.jetbrains.plugins.scala.lang.psi.impl.expr.ScAnnotationsImpl;
+import org.jetbrains.plugins.scala.lang.psi.impl.statements.ScPatternDefinitionImpl;
 import scala.collection.mutable.StringBuilder;
 
 import java.util.List;
@@ -33,14 +40,14 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
                             processingContext, @NotNull CompletionResultSet completionResultSet) {
                         CompletionResultSet resultSet = completionResultSet.withPrefixMatcher("");
                         PsiElement element = completionParameters.getOriginalPosition();
-                        if (element.getText().startsWith("IGGY:", 1)) {
-                            String text = element.getText().substring(6, element.getText().length() - 1);
-                            int pos = completionParameters.getOffset() - (element.getTextRange().getStartOffset() + 6);
+                        if (hasIGGYAnnotation(element)) {
+                            String text = element.getText().substring(1, element.getText().length() - 1);
+                            int pos = completionParameters.getOffset() - (element.getTextRange().getStartOffset() + 1);
                             addCompletionElements(element.getProject(), text, pos, completionResultSet);
                         }
                     }
                 });
-        extend(CompletionType.BASIC,
+        extend(CompletionType.SMART,
                 PlatformPatterns.psiElement(ScalaTokenTypes.tMULTILINE_STRING)
                         .withLanguage(ScalaLanguage.Instance),
                 new CompletionProvider<CompletionParameters>() {
@@ -48,13 +55,27 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
                     protected void addCompletions(@NotNull CompletionParameters completionParameters, ProcessingContext
                             processingContext, @NotNull CompletionResultSet completionResultSet) {
                         PsiElement element = completionParameters.getOriginalPosition();
-                        if (element.getText().startsWith("IGGY:", 3)) {
-                            String text = strip(8, element.getText().length() - 3, element.getText());
-                            int pos = completionParameters.getOffset() - (element.getTextRange().getStartOffset() + 8);
+                        if (hasIGGYAnnotation(element)) {
+                            String text = strip(3, element.getText().length() - 3, element.getText());
+                            int pos = completionParameters.getOffset() - (element.getTextRange().getStartOffset() + 3);
                             addCompletionElements(element.getProject(), text, pos, completionResultSet);
                         }
                     }
                 });
+    }
+
+    private static boolean hasIGGYAnnotation(PsiElement element) {
+        PsiElement context = element.getParent();
+        while (!(context instanceof ScPatternDefinitionImpl))
+            context = context.getParent();
+        for (PsiElement child : context.getChildren())
+            if (child instanceof ScAnnotationsImpl) {
+                ScAnnotation[] annotations = ((ScAnnotationsImpl) child).getAnnotations();
+                if (annotations.length == 1 && annotations[0].getText().equals("@IGGY")) {
+                    return true;
+                }
+            }
+        return false;
     }
 
     private static void addCompletionElements(Project project, String text, int pos, CompletionResultSet resultSet) {
