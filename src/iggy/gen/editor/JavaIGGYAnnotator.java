@@ -7,11 +7,9 @@ import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiLiteralExpression;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.impl.source.tree.java.PsiLocalVariableImpl;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.IGGYTokenTypes;
 import iggy.gen.psi.INontName$Declaration;
@@ -25,24 +23,37 @@ import iggy.gen.utils.IGGYElementFactory;
 public class JavaIGGYAnnotator implements Annotator {
     @Override
     public void annotate(PsiElement element, AnnotationHolder holder) {
-        if (element instanceof PsiLiteralExpression) {
+        if (element instanceof PsiLiteralExpression && hasIGGYAnnotation(element)) {
             String value = (String) ((PsiLiteralExpression) element).getValue();
-            int offset = 5;
-            if (value != null && value.startsWith("IGGY:")) {
-                IGGYFile file = IGGYElementFactory.createFile(element.getProject(), value.substring(offset));
+            if (value != null) {
+                IGGYFile file = IGGYElementFactory.createFile(element.getProject(), value);
                 if (file != null)
-                    file.accept(new Visitor(holder, element.getTextRange().getStartOffset() + offset));
+                    file.accept(new Visitor(holder, element.getTextRange().getStartOffset() + 1));
             }
         }
-
     }
 
-    private static class Visitor extends PsiElementVisitor {
+    public static boolean hasIGGYAnnotation(PsiElement element) {
+        PsiElement context = element.getParent();
+        while (!(context instanceof PsiLocalVariableImpl))
+            context = context.getParent();
+        if (context instanceof PsiLocalVariableImpl) {
+            PsiModifierList modifiers = ((PsiLocalVariableImpl) context).getModifierList();
+            if (modifiers != null) {
+                PsiAnnotation[] annotations = modifiers.getAnnotations();
+                if (annotations != null && annotations.length == 1 && annotations[0].getText().equals("@IGGY"))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public static class Visitor extends PsiElementVisitor {
 
         final AnnotationHolder holder;
         final int offset;
 
-        Visitor(AnnotationHolder holder, int offset) { this.holder = holder; this.offset = offset + 1; }
+        Visitor(AnnotationHolder holder, int offset) { this.holder = holder; this.offset = offset; }
 
         @Override
         public void visitElement(PsiElement element) {

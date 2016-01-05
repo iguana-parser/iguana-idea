@@ -33,6 +33,7 @@
       <lang.parserDefinition language="IGGY" implementationClass="iggy.gen.parser.IGGYParserDefinition"/>
       <annotator language="IGGY" implementationClass="iggy.gen.editor.IGGYAnnotator"/>
       <annotator language="JAVA" implementationClass="iggy.gen.editor.JavaIGGYAnnotator"/>
+      <annotator language="Scala" implementationClass="iggy.gen.editor.ScalaIGGYAnnotator"/>
       <lang.findUsagesProvider language="IGGY" implementationClass="iggy.gen.editor.IGGYFindUsesProvider"/>
       <lang.psiStructureViewFactory language="IGGY" implementationClass="iggy.gen.editor.IGGYStructureViewFactory"/>
       <completion.contributor language="IGGY" implementationClass="iggy.gen.editor.IGGYCompletionConstributor"/>

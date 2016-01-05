@@ -7,7 +7,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.impl.NontName$ReferenceImpl;
@@ -16,13 +15,9 @@ import iggy.gen.utils.IGGYUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.scala.ScalaLanguage;
 import org.jetbrains.plugins.scala.lang.lexer.ScalaTokenTypes;
-import org.jetbrains.plugins.scala.lang.parser.parsing.expressions.Annotation;
-import org.jetbrains.plugins.scala.lang.psi.api.expr.ScAnnotation;
-import org.jetbrains.plugins.scala.lang.psi.api.statements.ScPatternDefinition;
-import org.jetbrains.plugins.scala.lang.psi.impl.expr.ScAnnotationImpl;
-import org.jetbrains.plugins.scala.lang.psi.impl.expr.ScAnnotationsImpl;
-import org.jetbrains.plugins.scala.lang.psi.impl.statements.ScPatternDefinitionImpl;
-import scala.collection.mutable.StringBuilder;
+
+import static iggy.gen.editor.ScalaIGGYAnnotator.hasIGGYAnnotation;
+import static iggy.gen.editor.ScalaIGGYAnnotator.strip;
 
 import java.util.List;
 
@@ -38,7 +33,6 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
                     @Override
                     protected void addCompletions(@NotNull CompletionParameters completionParameters, ProcessingContext
                             processingContext, @NotNull CompletionResultSet completionResultSet) {
-                        CompletionResultSet resultSet = completionResultSet.withPrefixMatcher("");
                         PsiElement element = completionParameters.getOriginalPosition();
                         if (hasIGGYAnnotation(element)) {
                             String text = element.getText().substring(1, element.getText().length() - 1);
@@ -47,7 +41,7 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
                         }
                     }
                 });
-        extend(CompletionType.SMART,
+        extend(CompletionType.BASIC,
                 PlatformPatterns.psiElement(ScalaTokenTypes.tMULTILINE_STRING)
                         .withLanguage(ScalaLanguage.Instance),
                 new CompletionProvider<CompletionParameters>() {
@@ -64,21 +58,7 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
                 });
     }
 
-    private static boolean hasIGGYAnnotation(PsiElement element) {
-        PsiElement context = element.getParent();
-        while (!(context instanceof ScPatternDefinitionImpl))
-            context = context.getParent();
-        for (PsiElement child : context.getChildren())
-            if (child instanceof ScAnnotationsImpl) {
-                ScAnnotation[] annotations = ((ScAnnotationsImpl) child).getAnnotations();
-                if (annotations.length == 1 && annotations[0].getText().equals("@IGGY")) {
-                    return true;
-                }
-            }
-        return false;
-    }
-
-    private static void addCompletionElements(Project project, String text, int pos, CompletionResultSet resultSet) {
+    public static void addCompletionElements(Project project, String text, int pos, CompletionResultSet resultSet) {
         assert pos >=0 && pos < text.length();
         if (text.isEmpty()) return;
         IGGYFile file = IGGYElementFactory.createFile(project, text);
@@ -122,27 +102,4 @@ public class ScalaIGGYCompletionContributor extends CompletionContributor {
         }
     }
 
-    private static String strip(int start, int end, String text) {
-        char[] chars = text.toCharArray();
-        StringBuilder b = new StringBuilder();
-        int i = start;
-        while (i < end) {
-            b.append(chars[i]);
-            if (chars[i] == '\n' || chars[i] == '\r') {
-                i++;
-                if (i == end) break;
-                while (i < end && chars[i] == ' ') {
-                    b.append(chars[i]);
-                    i++;
-                }
-                if (i == end) break;
-                if (chars[i] == '|')
-                    b.append(' ');
-                else
-                    b.append(chars[i]);
-            }
-            i++;
-        }
-        return b.toString();
-    }
 }
