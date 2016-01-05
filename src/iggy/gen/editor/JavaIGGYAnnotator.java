@@ -13,6 +13,7 @@ import com.intellij.psi.impl.source.tree.java.PsiLocalVariableImpl;
 import iggy.gen.lang.IGGYFile;
 import iggy.gen.psi.IGGYTokenTypes;
 import iggy.gen.psi.INontName$Declaration;
+import iggy.gen.psi.impl.AAttributeAssocImpl;
 import iggy.gen.psi.impl.NontName$ReferenceImpl;
 import iggy.gen.utils.IGGYElementFactory;
 
@@ -75,20 +76,18 @@ public class JavaIGGYAnnotator implements Annotator {
                     annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("NONTNAME_UNRESOLVED_NAME_IN_STRING_LITERAL",
                             HighlighterColors.TEXT));
                 }
-            } else if (element instanceof LeafPsiElement) {
+            } else if (element instanceof AAttributeAssocImpl) {
                 int start = element.getTextRange().getStartOffset() + offset;
                 int end = element.getTextRange().getEndOffset() + offset;
-                if (((LeafPsiElement) element).getElementType() == IGGYTokenTypes.KEYWORD) {
-                    Annotation annotation = holder.createInfoAnnotation(new TextRange(start, end), null);
-                    annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("KEYWORD", HighlighterColors.TEXT));
-                }
+                Annotation annotation = holder.createInfoAnnotation(new TextRange(start, end), null);
+                annotation.setTextAttributes(TextAttributesKey.createTextAttributesKey("KEYWORD_IN_STRING_LITERAL", HighlighterColors.TEXT));
             } else if (element instanceof PsiErrorElement) {
                 int start = element.getTextRange().getStartOffset() + offset;
                 int end = element.getTextRange().getEndOffset() + offset;
                 holder.createErrorAnnotation(new TextRange(start, end), "Parse error.");
             }
 
-            for (PsiElement child : element.getChildren())
+            for (PsiElement child : element.getChildren()) // Only children of type CompositeElement
                 child.accept(this);
         }
     }

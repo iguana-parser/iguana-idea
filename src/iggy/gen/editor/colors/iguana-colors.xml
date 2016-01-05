@@ -8,6 +8,13 @@
         </value>
     </option>
 
+    <option name="KEYWORD_IN_STRING_LITERAL">
+        <value>
+            <!--<option name="FOREGROUND" value="009900"/>-->
+            <option name="FOREGROUND" value="39ac39"/>
+        </value>
+    </option>
+
     <option name="IDENTIFIER">
         <value>
             <option name="FOREGROUND" value="A52A2A"/>
@@ -57,7 +64,7 @@
 
     <option name="NONTNAME_UNRESOLVED_NAME_IN_STRING_LITERAL">
         <value>
-            <option name="FOREGROUND" value="009900"/>
+            <!--<option name="FOREGROUND" value="009900"/>-->
             <option name="FONT_TYPE" value="3"/>
         </value>
     </option>

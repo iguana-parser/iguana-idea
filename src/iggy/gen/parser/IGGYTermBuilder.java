@@ -21,7 +21,7 @@ public class IGGYTermBuilder implements TermBuilder<TreeElement> {
     @Override
     public TreeElement terminalTerm(TerminalType type, int l, int r, Input input) {
         if (type.nodeType() == TerminalNodeType.Regex()) {
-            IElementType tokenType = IGGYTokenTypes.get(type.name());
+            IElementType tokenType = IGGYTokenTypes.get(type.name().toUpperCase());
             return ASTFactory.leaf(tokenType, input.subString(l, r));
         }
         if (type.nodeType() == TerminalNodeType.Keyword())
