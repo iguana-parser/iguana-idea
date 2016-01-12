@@ -63,7 +63,7 @@ public class IGGYParser implements PsiParser {
             ASTNode ast = SPPFToTerms.convertNoSharing(sppf, new IGGYTermBuilder());
             return ast;
         } else {
-            System.out.println("Parse error...");
+            System.out.println("Parse error..." + result);
             NonterminalNode l = graph.getHead(Nonterminal.withName("Layout"))
                     .getGSSNode(0).getNonterminalNode(input);
             if (l != null) {
@@ -75,6 +75,10 @@ public class IGGYParser implements PsiParser {
                     ParseResult res = null;
                     if (matcher.find(sppf.getRightExtent())) {
                         index = matcher.start();
+                        if (index <= result.asParseError().inputIndex()) {
+                            if (matcher.find(matcher.end()))
+                                index = matcher.start();
+                        }
                         res = Iguana.parse(Input.fromString(input.subString(index, input.length())), graph, start);
                     }
                     CompositeElement startNode = ASTFactory.composite(IGGYElementTypes.get("START_"+ ntName.toUpperCase() + "_START"));
