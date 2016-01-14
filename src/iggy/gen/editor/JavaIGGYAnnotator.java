@@ -36,7 +36,7 @@ public class JavaIGGYAnnotator implements Annotator {
 
     public static boolean hasIGGYAnnotation(PsiElement element) {
         PsiElement context = element.getParent();
-        while (!(context instanceof PsiLocalVariableImpl))
+        while (context != null && !(context instanceof PsiLocalVariableImpl))
             context = context.getParent();
         if (context instanceof PsiLocalVariableImpl) {
             PsiModifierList modifiers = ((PsiLocalVariableImpl) context).getModifierList();

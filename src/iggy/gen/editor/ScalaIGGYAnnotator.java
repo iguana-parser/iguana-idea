@@ -38,7 +38,7 @@ public class ScalaIGGYAnnotator implements Annotator {
 
     public static boolean hasIGGYAnnotation(PsiElement element) {
         PsiElement context = element.getParent();
-        while (!(context instanceof ScPatternDefinitionImpl))
+        while (context != null && !(context instanceof ScPatternDefinitionImpl))
             context = context.getParent();
         if (context instanceof ScPatternDefinitionImpl) {
             PsiAnnotation[] annotations = ((ScPatternDefinitionImpl) context).getAnnotations();
