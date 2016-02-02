@@ -9,6 +9,7 @@ import com.intellij.psi.tree.IElementType;
 import iggy.gen.psi.IGGYElementTypes;
 import iggy.gen.psi.IGGYTokenTypes;
 import iguana.parsetrees.slot.TerminalNodeType;
+import iguana.parsetrees.term.AmbiguityBranch;
 import iguana.parsetrees.term.RuleType;
 import iguana.parsetrees.term.TermBuilder;
 import iguana.parsetrees.term.TerminalType;
@@ -40,10 +41,22 @@ public class IGGYTermBuilder implements TermBuilder<TreeElement> {
     }
 
     @Override
-    public TreeElement ambiguityTerm(scala.collection.Seq<scala.collection.Seq<TreeElement>> children) { throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity."); }
+    public TreeElement ambiguityTerm(scala.collection.Seq<AmbiguityBranch<TreeElement>> children) {
+        throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity.");
+    }
 
     @Override
-    public TreeElement cycle(String label) { throw new RuntimeException("Not yet supported in the idea tree builder: cycles."); }
+    public AmbiguityBranch<TreeElement> nonterminalAmbiguityBranch(RuleType ruleType, Seq<TreeElement> children, Input input) {
+        throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity.");
+    }
+
+    @Override
+    public AmbiguityBranch<TreeElement> intermediateAmbiguityBranch(Seq<TreeElement> children) {
+        throw new RuntimeException("Not yet supported in the idea tree builder: ambiguity.");
+    }
+
+    @Override
+    public TreeElement cycle(Object label) { throw new RuntimeException("Not yet supported in the idea tree builder: cycles."); }
 
     @Override
     public TreeElement star(Seq<TreeElement> children) {
