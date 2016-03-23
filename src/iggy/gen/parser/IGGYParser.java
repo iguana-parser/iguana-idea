@@ -36,26 +36,29 @@ import java.util.regex.Pattern;
 
 public class IGGYParser implements PsiParser {
 
-    private Grammar grammar;
-    private Start start;
-    private GrammarGraph graph;
-    private Pattern pattern = java.util.regex.Pattern.compile("([\\u0009-\\u000A\\u000C-\\u000D\\u0020-\\u0020]+|)([\\$-\\$A-Z_-_a-z]([\\$-\\$0-9A-Z_-_a-z]|[\\$-\\$A-Z_-_a-z])*)([\\u0009-\\u000A\\u000C-\\u000D\\u0020-\\u0020]+|)::=");
+    private static final Grammar grammar;
+    private static final Start start;
 
     private static final String ntName = "Definition";
 
+    private GrammarGraph graph;
+
+    static {
+        Grammar g = Grammar.load(IGGYParser.class.getResourceAsStream("/IggyGrammar"));
+        DesugarPrecedenceAndAssociativity precedenceAndAssociativity = new DesugarPrecedenceAndAssociativity();
+        precedenceAndAssociativity.setOP2();
+        g = new EBNFToBNF().transform(g);
+        g = precedenceAndAssociativity.transform(g);
+        g = new Names().transform(g);
+        grammar = new LayoutWeaver().transform(g);
+        start = grammar.getStartSymbol(Nonterminal.withName(ntName));
+    }
+
+    private static final Pattern pattern = java.util.regex.Pattern.compile("\\s++[^\\s]++\\s*+::=");
+
     public ASTNode parse(IElementType root, PsiBuilder builder) {
         Input input = Input.fromString(builder.getOriginalText().toString());
-        if (graph == null) {
-            grammar = Grammar.load(this.getClass().getResourceAsStream("/IggyGrammar"));
-            DesugarPrecedenceAndAssociativity precedenceAndAssociativity = new DesugarPrecedenceAndAssociativity();
-            precedenceAndAssociativity.setOP2();
-            grammar = new EBNFToBNF().transform(grammar);
-            grammar = precedenceAndAssociativity.transform(grammar);
-            grammar = new Names().transform(grammar);
-            grammar = new LayoutWeaver().transform(grammar);
-            start = grammar.getStartSymbol(Nonterminal.withName(ntName));
-            graph = GrammarGraph.from(grammar, input, Configuration.DEFAULT);
-        }
+        graph = GrammarGraph.from(grammar, input, Configuration.DEFAULT);
         ParseResult result = Iguana.parse(input, graph, start);
         if (result.isParseSuccess()) {
             System.out.println("Success...");
